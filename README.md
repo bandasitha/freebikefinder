@@ -11,30 +11,37 @@
 
 1. **Front-End:** An approachable, straighforward, mobile-friendly (some underserved individuals may not have easy access to a full computer) search function that allows at least partial selection of search criteria, including (but not limited to):
 
- - State
- - If bicycles are available (vs. repair-only organizations)
- - Available accessories &/or helmets
- - Available classes
- - If bicycle donations are accepted
- - Clientele (student, children, etc)
+- State
+- If bicycles are available (vs. repair-only organizations)
+- Available accessories &/or helmets
+- Available classes
+- If bicycle donations are accepted
+- Clientele (student, children, etc)
 
 2. **Back-End:** A MongoDB collection, one-document-per-organization organization with the following endpoint(s):
 
- - https://www.freebikefinder.com/shops
- - https://www.freebikefinder.com/orgs - possible
+- https://www.freebikefinder.com/
+- https://www.freebikefinder.com/orgs - possible
 
- The `/shops` endpoint will allow for query parameters such as (again, not limited to):
+The `/shops` endpoint will allow for query parameters such as (again, not limited to):
 
-  - ?state=
-  - ?freebikes= - likely T/F
-  - ?helmets= - likely T/F
-  - ?minDonation=
-  - ?maxDonation=
-  - ?acceptsVolunteers= - likely T/F
-  - ?earnBikes= - likely T/T
+- /:state
+  - /wa returns all shops in Washington state
+- /:state/:product (bikes, helmets, etc.)
+  - /wa/bikes returns all shops in Washington state with free bike options
+- /:state/:shopId/shopName
+  - /wa/284/the-bikery returns page specific to The Bikery
+- /volunteer
+  - /volunteer returns all shops offering volunteering options
+- /volunteer/:state
+  - /volunteer/wa returns all shops offering volunteering options in Washington state
+- /donate/
+  - /donate returns all shops offering donation options
+- /donate/:state
+  - /donate/wa returns all shops offering donation options in Washington state
 
-3. **Data:** Data has been sourced through internet search, ensuring lack of defunct or closed organizations, with social media links available for improved user approachability (particularly among certain age groups). 
+3. **Data:** Data has been sourced through internet search, ensuring lack of defunct or closed organizations, with social media links available for improved user approachability (particularly among certain age groups).
 
 ## Work Timeline
 
-1. 
+1.
