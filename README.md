@@ -20,28 +20,46 @@
 
 2. **Back-End:** A MongoDB collection, one-document-per-organization organization with the following endpoint(s):
 
-- https://www.freebikefinder.com/
-- https://www.freebikefinder.com/orgs - possible
+| Request Type | Endpoint                     | Expected results                                                                                           |
+| ------------ | ---------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| GET          | /:state                      | Retrieves all businesses with state field matching :state.                                                 |
+| GET          | /:state/product/:productType | Retrieves all businesses with state field matching :state and productsOffered field including :productType |
+| GET          | /:state/classes/:classType   | Retrieves all businesses with classes field including :classType value                                     |
+| GET          | /:state/service/:serviceType | Retrieves all businesses with service field including :serviceType value                                   |
+| GET          | /:state/donate/:donationType | Retrieves all businesses with donate field including :donationType value                                   |
+| GET          | /business                    | Retrieves all businesses                                                                                   |
+| POST         | /business                    | Adds a new business record                                                                                 |
+| GET          | /business/:businessId        | Retrieves all businesses with \_id matching :businessId value                                              |
+| PUT          | /business/:businessId        | Updates business record with \_id value matching :businessId                                               |
+| DELETE       | /business/:businessId        | Removes business with \_id value matching :businessId                                                      |
+| GET          | /:state?query                | Searches for query value in business records.                                                              |
 
-The `/shops` endpoint will allow for query parameters such as (again, not limited to):
-
-- /:state
-  - /wa returns all shops in Washington state
-- /:state/:product (bikes, helmets, etc.)
-  - /wa/bikes returns all shops in Washington state with free bike options
-- /:state/:shopId/shopName
-  - /wa/284/the-bikery returns page specific to The Bikery
-- /volunteer
-  - /volunteer returns all shops offering volunteering options
-- /volunteer/:state
-  - /volunteer/wa returns all shops offering volunteering options in Washington state
-- /donate/
-  - /donate returns all shops offering donation options
-- /donate/:state
-  - /donate/wa returns all shops offering donation options in Washington state
-
-3. **Data:** Data has been sourced through internet search, ensuring lack of defunct or closed organizations, with social media links available for improved user approachability (particularly among certain age groups).
+3. **Data:** Data has been sourced through internet search, ensuring lack of defunct or closed organizations, with contact details (address, email and phone number) and social media links available for improved user approachability (particularly among certain age groups).
 
 ## Work Timeline
 
-1.
+### Week 1
+
+- [Complete proof of concept data set](https://docs.google.com/spreadsheets/d/13HB8NiuPO73cRedv-w-ww59k3hI5NAMnZrP_jkeGzt8/edit#gid=0).
+- Load data into MongoDB
+- Begin wireframing
+
+### Week 2
+
+- Finish wireframing
+- Begin unit testing of API endpoints
+
+### Week 3
+
+- Begin development of front-end
+- Finish unit testing of API endpoints
+
+### Week 4
+
+- Finish development of front-end
+
+### Week 5
+
+- Testing
+- Bug fixes
+- Develop presentation
