@@ -44,4 +44,18 @@ The `/shops` endpoint will allow for query parameters such as (again, not limite
 
 ## Work Timeline
 
-1.
+1. Week 1: 
+  - Input data into database
+2. Week 2:
+  - Build front end skeleton
+  - Build back end skeleton
+  - Begin test writing
+3. Week 3:
+  - Finalize front end
+  - Finalize back end
+  - Finalize tests
+4. Week 4:
+  - Testing & bug fixes
+5. Week 5:
+  - Available time to finish anything unfinished
+  - Finish testing if necessary
