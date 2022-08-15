@@ -3,29 +3,35 @@ const ObjectId = require('mongodb').ObjectId;
 
 // uri is from mongodb account > Connect > Connect your app > Driver: Node
 const uri =
-  'mongodb+srv://superuser:7Kvszal8Uz7Oqzok@cluster0.mwyfrof.mongodb.net/?retryWrites=true&w=majority';
+  'mongodb+srv://superuser:mBu94Eqcvub5w24f@cluster0.mwyfrof.mongodb.net/?retryWrites=true&w=majority';
 
 const client = new MongoClient(uri);
 
 const databaseName = 'free-bike-finder';
 const collName = 'companies';
 
+const database = client.db(databaseName);
+const shopData = database.collection(collName);
+
 module.exports = {};
 
 // https://www.mongodb.com/docs/drivers/node/current/usage-examples/find/
-module.exports.getAll = async () => {
-  const database = client.db(databaseName);
-  const shopData = database.collection(collName);
+module.exports.getAllShops = async () => {
   const query = {};
-  let resultCursor = await shopData.find(query);
-  return resultCursor.toArray();
+  let cursor = await shopData.find(query);
+  console.log('test');
+  return cursor.toArray();
 };
 
 module.exports.getByParameter = async (queryObj) => {
   const database = client.db(databaseName);
   const shopData = database.collection(collName);
   let result = await shopData.find(queryObj);
-  return result.toArray();
+  return cursor
+    ? cursor.toArray()
+    : {
+        error: `There was an error retrieving shop data. Please try again later.`,
+      };
 };
 
 module.exports.createShopDocument = async (itemsToInsert) => {
@@ -33,21 +39,6 @@ module.exports.createShopDocument = async (itemsToInsert) => {
   const shopData = database.collection(collName);
   const query = { ...itemsToInsert };
   let result = await shopData.insertOne(query);
-
-  // retrieve all movies from database
-  module.exports.getAllShops = async () => {
-    const query = {};
-    let cursor = await collectionData
-      .find(query)
-      .limit(10)
-      .sort({ runtime: -1 });
-
-    return cursor
-      ? cursor.toArray()
-      : {
-          error: `There was an error retrieving shop data. Please try again later.`,
-        };
-  };
 
   return result;
 };
