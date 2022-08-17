@@ -1,8 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
+import ShopCard from './Components/ShopCard';
 
 function App() {
-  return <div></div>;
+  return (
+    <div>
+      <ShopCard title='Bike Donation Home' />
+    </div>
+  );
 }
 
 export default App;
