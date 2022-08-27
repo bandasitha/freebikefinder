@@ -17,8 +17,8 @@ module.exports = {};
 // https://www.mongodb.com/docs/drivers/node/current/usage-examples/find/
 module.exports.getAllShops = async () => {
   const query = {};
-  let cursor = await shopData.find(query);
-  console.log('test');
+  let cursor = await shopData.find(query).limit(10);
+  console.log('retrieving all records (limit 10)...');
   return cursor.toArray();
 };
 
