@@ -2,10 +2,10 @@ const request = require("supertest");
 const server = require("../server");
 
 // Declare the jest will mock movieData. Must be before the require statement.
-jest.mock("../dataInterface/findshops");
-const shopData = require("../dataInterface/findshops")
+jest.mock("../dataInterface/shops");
+const shopData = require("../dataInterface/shops")
 
-describe("/findshops routes", () => {
+describe("/shops routes", () => {
 
   beforeEach(() => {
 
@@ -13,18 +13,18 @@ describe("/findshops routes", () => {
 
   describe("GET /", () =>{
     it("should return an array on success", async () => {
-        shopData.getAll.mockResolvedValue([{_id:"890", title:"One Day"}]);
+        shopData.getAllShops.mockResolvedValue([{_id:"890", title:"One Day"}]);
 
-      const res = await request(server).get("/findshops");
+      const res = await request(server).get("/shops");
 
       expect(res.statusCode).toEqual(200);
       expect(Array.isArray(res.body)).toEqual(true);
       expect(res.body.error).not.toBeDefined();
     });
     it("should return an error message on error", async () => {
-        shopData.getAll.mockResolvedValue(null);
+        shopData.getAllShops.mockResolvedValue(null);
 
-      const res = await request(server).get("/findshops");
+      const res = await request(server).get("/shops");
 
       expect(res.statusCode).toEqual(500);
       expect(res.body.error).toBeDefined();
