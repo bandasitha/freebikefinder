@@ -3,18 +3,29 @@ import PropTypes from 'prop-types';
 import './ShopCard.css';
 
 export default function ShopCard({ title, children }) {
+  const [shops, setShops] = useState([]);
+
   useEffect(() => {
     fetch(`http://localhost:5000/shops`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        setShops(data);
       });
   }, []);
 
   return (
     <div className='shop'>
-      <h2 className='carousel__name'>{title}</h2>
-      <div className='carousel__content'>Data goes here</div>
+      <div className='carousel__content'>
+        {shops.map((shop, index) => {
+          return (
+            <div>
+              <h2>{shop.name}</h2>
+              <p>{shop.address}</p>
+              <p>{shop.phone}</p>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

@@ -24,11 +24,10 @@ router.get('/', async (req, res) => {
 // curl 'http://localhost:5000/shops?query-item=param'
 // curl 'http://localhost:5000/shops?state=ca'
 router.get('/', async (req, res) => {
-  
   if (!req.query) {
     res.status(404).send({ error: 'No query parameters found.' });
   }
-  
+
   let resultStatus;
   let queryObj = {};
 

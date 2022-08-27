@@ -18,7 +18,6 @@ module.exports = {};
 module.exports.getAllShops = async () => {
   const query = {};
   let cursor = await shopData.find(query).limit(10);
-  console.log('retrieving all records (limit 10)...');
   return cursor.toArray();
 };
 
