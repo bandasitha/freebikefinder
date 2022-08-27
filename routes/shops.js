@@ -21,6 +21,23 @@ router.get('/', async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
+// Route to retrieve (GET) one shop from database by _id value
+// curl http://localhost:5000/shops/630a74a5423ebfea5ae6acc3
+router.get('/:id', async (req, res) => {
+  let resultStatus;
+  const result = await shopData.getShopById(req.params.id);
+
+  if (result === null) {
+    resultStatus = 500;
+  } else if (result.length === 0 || result.error) {
+    resultStatus = 404;
+  } else {
+    resultStatus = 200;
+  }
+
+  res.status(resultStatus).send(result);
+});
+
 // curl 'http://localhost:5000/shops?query-item=param'
 // curl 'http://localhost:5000/shops?state=ca'
 router.get('/', async (req, res) => {
@@ -36,7 +53,7 @@ router.get('/', async (req, res) => {
     queryObj['state'] = state;
   }
 
-  let result = await shopData.getByParameter(queryObj);
+  let result = await shopData.getShopByParameter(queryObj);
 
   if (result === null) {
     resultStatus = 500;
@@ -54,7 +71,7 @@ router.get('/', async (req, res) => {
 // curl -X POST -H "Content-Type: application/json" -d '{"website":"http://test-shop.com", "name":"Test Shop", "state":"WA", "address":"1234 Main St. Seattle WA", "phone":"(234)456-5678", "email":"test@test.co"}' http://localhost:5000/shops
 router.post('/', async (req, res) => {
   let resultStatus;
-  let result = await shopData.createShopDocument(req.body);
+  let result = await shopData.createShop(req.body);
 
   if (result === null) {
     resultStatus = 500;

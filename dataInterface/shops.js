@@ -21,7 +21,17 @@ module.exports.getAllShops = async () => {
   return cursor.toArray();
 };
 
-module.exports.getByParameter = async (queryObj) => {
+module.exports.getShopById = async (shopId) => {
+  if (!validateId(shopId)) {
+    return { error: `Invalid id value. Please try again` };
+  }
+
+  let result = await shopData.findOne({ _id: ObjectId(shopId) });
+
+  return result;
+};
+
+module.exports.getShopByParameter = async (queryObj) => {
   let result = await shopData.find(queryObj);
   return cursor
     ? cursor.toArray()
@@ -30,7 +40,7 @@ module.exports.getByParameter = async (queryObj) => {
       };
 };
 
-module.exports.createShopDocument = async (itemsToInsert) => {
+module.exports.createShop = async (itemsToInsert) => {
   const query = { ...itemsToInsert };
   let result = await shopData.insertOne(query);
 
@@ -41,19 +51,10 @@ module.exports.updateShopById = async (shopId, shopObj) => {
   if (!validateId(shopId)) {
     return { error: `Invalid id value. Please try again` };
   }
-  const quert = {};
+
   let result = await shopData.updateOne(
     { _id: ObjectId(shopId) },
-    {
-      $set: {
-        website: shopObj.website,
-        name: shopObj.name,
-        state: shopObj.state,
-        address: shopObj.address,
-        phone: shopObj.phone,
-        email: shopObj.email,
-      },
-    }
+    { $set: shopObj }
   );
 
   return result;
