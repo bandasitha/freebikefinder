@@ -14,13 +14,14 @@ const shopData = database.collection(collName);
 
 module.exports = {};
 
-// https://www.mongodb.com/docs/drivers/node/current/usage-examples/find/
+// Retrieve all shops from db
 module.exports.getAllShops = async () => {
   const query = {};
   let cursor = await shopData.find(query).limit(10);
   return cursor.toArray();
 };
 
+// Retrieve one shop from db matching provided _id value
 module.exports.getShopById = async (shopId) => {
   if (!validateId(shopId)) {
     return { error: `Invalid id value. Please try again` };
@@ -31,6 +32,7 @@ module.exports.getShopById = async (shopId) => {
   return result;
 };
 
+// Retrieve all shops from db matching supplied parameters
 module.exports.getShopByParameter = async (queryObj) => {
   let result = await shopData.find(queryObj);
   return cursor
@@ -40,6 +42,7 @@ module.exports.getShopByParameter = async (queryObj) => {
       };
 };
 
+// Creates one new shop with provided data fields
 module.exports.createShop = async (itemsToInsert) => {
   const query = { ...itemsToInsert };
   let result = await shopData.insertOne(query);
@@ -47,6 +50,7 @@ module.exports.createShop = async (itemsToInsert) => {
   return result;
 };
 
+// Updates one shop with provided data fields matching provided _id value
 module.exports.updateShopById = async (shopId, shopObj) => {
   if (!validateId(shopId)) {
     return { error: `Invalid id value. Please try again` };
@@ -74,6 +78,7 @@ module.exports.deleteByID = async (shopId) => {
   return {message: `Deleted ${result.deletedCount} shops.`};
 }
 
+// Helper function to validate provided _id values
 let validateId = (id) => {
   return ObjectId.isValid(id);
 };
