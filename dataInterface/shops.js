@@ -26,9 +26,6 @@ findCompanybyPhone = async (phone) => {
 
 // https://www.mongodb.com/docs/drivers/node/current/usage-examples/find/
 module.exports.getAllShops = async () => {
-  const database = client.db(databaseName);
-  const shopData = database.collection(collName);
-  
   const query = {};
   let cursor = await shopData.find(query).limit(10);
   console.log(query);
@@ -54,7 +51,7 @@ module.exports.createShopDocument = async (itemsToInsert) => {
 module.exports.updateById = async (shopId, newObj) => {
   // Stealing the following filter because it makes the updateOne() code easier to read.
   const updateRules = {
-    $set: {"website" : newObj.website, "name": newObj.name, "address": newObj.address, "phone": newObj.phone, "email": newObj.email, "contact_form": newObj.contact_form, "facebook": newObj.facebook, "twitter": newObj.twitter, "instagram": newObj.instagram, "cost": newObj.cost, "helmets": newObj.bikes, "maintenance": newObj.maintenance, "tools": newObj.tools, "classes": newObj.classes, "suggested_donation": newObj.suggested_donation, "volunteering": newObj.volunteering, "donate_bikes": newObj.donate_bikes, "target_client": newObj.target_client, }
+    $set: {newObj}
   };
   const filter = { _id: ObjectId(shopId) };
   const result = await shopData .updateOne(filter, updateRules);

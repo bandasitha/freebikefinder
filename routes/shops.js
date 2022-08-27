@@ -74,9 +74,14 @@ router.post('/', async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
-// curl -X PUT -H "Content-Type: application/json" -d '{"bikes":"TRUE"}' http://localhost:5000/companies/test-shop
-router.put("/:name", async (req, res, next) => {
+// curl 'http://localhost:5000/shops/name-param?idtype=name'
+// curl 'http://localhost:5000/shops/phone-num?idtype=phone'
+router.put("/:id", async (req, res, next) => {
   let resultStatus;
+  const validAttrib = [
+    "name", "website", 
+    //ADD MORE LATER
+  ]
   const result = await movieData.updateByName(req.params.name, req.body)
 
   if(result.error){
@@ -89,18 +94,19 @@ router.put("/:name", async (req, res, next) => {
 });
 
 // curl -X PUT -H "Content-Type: application/json" -d '{"bikes":"TRUE"}' http://localhost:5000/companies/(123) 456-7890
-router.put("/:phone", async (req, res, next) => {
-  let resultStatus;
-  const result = await movieData.updateByPhone(req.params.phone, req.body)
 
-  if(result.error){
-    resultStatus = 400;
-  } else {
-    resultStatus = 200;
-  }
+// router.put("/:phone", async (req, res, next) => {
+//   let resultStatus;
+//   const result = await movieData.updateByPhone(req.params.phone, req.body)
 
-  res.status(resultStatus).send(result);
-});
+//   if(result.error){
+//     resultStatus = 400;
+//   } else {
+//     resultStatus = 200;
+//   }
+
+//   res.status(resultStatus).send(result);
+// });
 
 // curl -X DELETE http://localhost:5000/movies/573a1390f29313caabcd4135
 router.delete("/:id", async (req, res, next) => {
