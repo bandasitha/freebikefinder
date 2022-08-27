@@ -21,6 +21,16 @@ module.exports.getAllShops = async () => {
   return cursor.toArray();
 };
 
+module.exports.getShopById = async (shopId) => {
+  if (!validateId(shopId)) {
+    return { error: `Invalid id value. Please try again` };
+  }
+
+  let result = await shopData.findOne({ _id: ObjectId(shopId) });
+
+  return result;
+};
+
 module.exports.getByParameter = async (queryObj) => {
   let result = await shopData.find(queryObj);
   return cursor
@@ -41,19 +51,10 @@ module.exports.updateShopById = async (shopId, shopObj) => {
   if (!validateId(shopId)) {
     return { error: `Invalid id value. Please try again` };
   }
-  const quert = {};
+
   let result = await shopData.updateOne(
     { _id: ObjectId(shopId) },
-    {
-      $set: {
-        website: shopObj.website,
-        name: shopObj.name,
-        state: shopObj.state,
-        address: shopObj.address,
-        phone: shopObj.phone,
-        email: shopObj.email,
-      },
-    }
+    { $set: shopObj }
   );
 
   return result;
