@@ -22,8 +22,6 @@ module.exports.getAllShops = async () => {
 };
 
 module.exports.getByParameter = async (queryObj) => {
-  const database = client.db(databaseName);
-  const shopData = database.collection(collName);
   let result = await shopData.find(queryObj);
   return cursor
     ? cursor.toArray()
@@ -33,10 +31,34 @@ module.exports.getByParameter = async (queryObj) => {
 };
 
 module.exports.createShopDocument = async (itemsToInsert) => {
-  const database = client.db(databaseName);
-  const shopData = database.collection(collName);
   const query = { ...itemsToInsert };
   let result = await shopData.insertOne(query);
 
   return result;
+};
+
+module.exports.updateShopById = async (shopId, shopObj) => {
+  if (!validateId(shopId)) {
+    return { error: `Invalid id value. Please try again` };
+  }
+  const quert = {};
+  let result = await shopData.updateOne(
+    { _id: ObjectId(shopId) },
+    {
+      $set: {
+        website: shopObj.website,
+        name: shopObj.name,
+        state: shopObj.state,
+        address: shopObj.address,
+        phone: shopObj.phone,
+        email: shopObj.email,
+      },
+    }
+  );
+
+  return result;
+};
+
+let validateId = (id) => {
+  return ObjectId.isValid(id);
 };
