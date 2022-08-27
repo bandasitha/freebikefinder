@@ -102,4 +102,18 @@ router.put('/:id', async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
+// curl -X DELETE http://localhost:5000/shops/<_id here>
+router.delete('/:id', async (req, res) => {
+  let resultStatus;
+  const result = await shopData.deleteByID(req.params.id);
+
+  if(result.error){
+    resultStatus = 400;
+  } else {
+    resultStatus = 200;
+  }
+
+  res.status(resultStatus).send(result);
+});
+
 module.exports = router;
