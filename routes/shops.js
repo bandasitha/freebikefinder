@@ -74,7 +74,7 @@ router.post('/', async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
-// curl 'http://localhost:5000/shops/name-param?idtype=name'
+// curl 'http://localhost:5000/shops/shop-name?idtype=name'
 // curl 'http://localhost:5000/shops/phone-num?idtype=phone'
 router.put("/:id", async (req, res, next) => {
   let resultStatus;
@@ -82,6 +82,12 @@ router.put("/:id", async (req, res, next) => {
     "name", "website", 
     //ADD MORE LATER
   ]
+
+  if (:id == name) {
+    findCompanyByName
+  } else {
+    
+  }
   const result = await movieData.updateByName(req.params.name, req.body)
 
   if(result.error){
