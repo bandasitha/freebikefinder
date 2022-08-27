@@ -31,7 +31,7 @@ module.exports.getShopById = async (shopId) => {
   return result;
 };
 
-module.exports.getByParameter = async (queryObj) => {
+module.exports.getShopByParameter = async (queryObj) => {
   let result = await shopData.find(queryObj);
   return cursor
     ? cursor.toArray()
@@ -40,7 +40,7 @@ module.exports.getByParameter = async (queryObj) => {
       };
 };
 
-module.exports.createShopDocument = async (itemsToInsert) => {
+module.exports.createShop = async (itemsToInsert) => {
   const query = { ...itemsToInsert };
   let result = await shopData.insertOne(query);
 
