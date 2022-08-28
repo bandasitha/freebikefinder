@@ -6,7 +6,7 @@ const shopData = require('../dataInterface/shops');
 // curl http://localhost:5000/shops
 router.get('/', async (req, res) => {
   let resultStatus;
-  const result = await shopData.getAllShops();
+  const result = await shopData.getAllShops(req.query);
 
   if (result === null) {
     resultStatus = 500;
@@ -39,7 +39,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // curl 'http://localhost:5000/shops?query-item=param'
-// curl 'http://localhost:5000/shops?state=ca'
+// curl 'http://localhost:5000/shops?state=ri'
 router.get('/', async (req, res) => {
   if (!req.query) {
     res.status(404).send({ error: 'No query parameters found.' });
@@ -49,9 +49,11 @@ router.get('/', async (req, res) => {
   let queryObj = {};
 
   if (req.query.state) {
-    state = req.query.state;
+    state = req.query.state.toUpperCase();
     queryObj['state'] = state;
   }
+
+  console.log('query = ', queryObj);
 
   let result = await shopData.getShopByParameter(queryObj);
 
@@ -107,7 +109,7 @@ router.delete('/:id', async (req, res) => {
   let resultStatus;
   const result = await shopData.deleteByID(req.params.id);
 
-  if(result.error){
+  if (result.error) {
     resultStatus = 400;
   } else {
     resultStatus = 200;
