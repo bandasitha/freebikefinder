@@ -68,15 +68,17 @@ module.exports.deleteByID = async (shopId) => {
   if (~validateId(shopId)) {
     return { error: `Invalid id value. Please try again` };
   }
-  const deletionRules = {_id:ObjectId(shopId)};
+  const deletionRules = { _id: ObjectId(shopId) };
   let result = await shopData.deleteOne(deletionRules);
-  
+
   if (result.deletedCount != 1) {
-    return {error: `Something went wrong. ${result.deletedCount} shops were deleted.`}
+    return {
+      error: `Something went wrong. ${result.deletedCount} shops were deleted.`,
+    };
   }
-  
-  return {message: `Deleted ${result.deletedCount} shops.`};
-}
+
+  return { message: `Deleted ${result.deletedCount} shops.` };
+};
 
 // Helper function to validate provided _id values
 let validateId = (id) => {

@@ -9,12 +9,16 @@ const shopData = require('../dataInterface/shops');
 router.get('/', async (req, res) => {
   let result;
   let resultStatus;
+
   if (!req.query) {
     result = await shopData.getAllShops();
   } else {
     let state = req.query.state.toUpperCase();
     result = await shopData.getShopByParameter(state);
   }
+
+  const result = await shopData.getAllShops(req.query);
+
   if (result === null) {
     resultStatus = 500;
   } else if (result.length === 0) {
@@ -36,10 +40,8 @@ router.get('/:id', async (req, res) => {
 
   if (result === null) {
     resultStatus = 500;
-  } else if (result.length === 0) {
+  } else if (result.length === 0 || result.error) {
     resultStatus = 404;
-  } else if (result.error) {
-    resultStatus = 400;
   } else {
     resultStatus = 200;
   }
@@ -89,7 +91,7 @@ router.delete('/:id', async (req, res) => {
   let resultStatus;
   const result = await shopData.deleteByID(req.params.id);
 
-  if(result.error){
+  if (result.error) {
     resultStatus = 400;
   } else {
     resultStatus = 200;
