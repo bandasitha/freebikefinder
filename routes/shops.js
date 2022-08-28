@@ -17,8 +17,6 @@ router.get('/', async (req, res) => {
     result = await shopData.getShopByParameter(state);
   }
 
-  const result = await shopData.getAllShops(req.query);
-
   if (result === null) {
     resultStatus = 500;
   } else if (result.length === 0) {
@@ -28,6 +26,7 @@ router.get('/', async (req, res) => {
   } else {
     resultStatus = 200;
   }
+
   res.status(resultStatus).send(result);
 });
 
