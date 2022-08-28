@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
   let result;
   let resultStatus;
 
-  if (!req.query) {
+  if (Object.keys(req.query).length === 0) {
     result = await shopData.getAllShops();
   } else {
     let state = req.query.state.toUpperCase();
