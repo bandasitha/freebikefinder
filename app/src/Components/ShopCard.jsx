@@ -1,36 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './ShopCard.css';
 
-export default function ShopCard({ title, children }) {
-  const [shops, setShops] = useState([]);
-
-  useEffect(() => {
-    fetch(`http://localhost:5000/shops`)
-      .then((response) => response.json())
-      .then((data) => {
-        setShops(data);
-      });
-  }, []);
-
+export default function ShopCard({ shopId, shopName, shopAddress, shopState }) {
   return (
     <div className='shop'>
-      <div className='carousel__content'>
-        {shops.map((shop, index) => {
-          return (
-            <div>
-              <h2>{shop.name}</h2>
-              <p>{shop.address}</p>
-              <p>{shop.phone}</p>
-            </div>
-          );
-        })}
-      </div>
+      <h2>
+        <a href={`../shop/${shopId}`}>{shopName}</a>
+      </h2>
+      <address>{shopAddress}</address>
+      <p>
+        State = <a href={`./shops/${shopState}`}>{shopState}</a>
+      </p>
     </div>
   );
 }
 
-ShopCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  children: PropTypes.array.isRequired,
-};
+ShopCard.propTypes = {};
