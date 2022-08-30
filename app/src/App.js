@@ -26,12 +26,12 @@ function App() {
         </Link>
       </nav>
       <container>
-        {/* <Routes>
-          <Route path='/'></Route>
+        <Routes>
+          <Route path='/' element={<Home />}></Route>
           <Route path='/shops' element={<Shops />}></Route>
           <Route path='/shops/:state' element={<Shops />}></Route>
           <Route path='/shop/:shopId' element={<Shop />}></Route>
-        </Routes> */}
+        </Routes>
         <ShopCard title='Bike Donation Home' />
       </container>
     </main>
