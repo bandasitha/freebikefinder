@@ -2,7 +2,7 @@ const { MongoClient } = require('mongodb');
 const ObjectId = require('mongodb').ObjectId;
 
 // uri is from mongodb account > Connect > Connect your app > Driver: Node
-const uri = process.env.MONGODB_URI;
+const uri = 'mongodb+srv://superuser:4IYc1f1LQtmvDELv@cluster0.mwyfrof.mongodb.net/';
 
 const client = new MongoClient(uri);
 
