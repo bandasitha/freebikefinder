@@ -32,6 +32,7 @@ function App() {
           <Route path='/shops/:state' element={<Shops />}></Route>
           <Route path='/shop/:shopId' element={<Shop />}></Route>
         </Routes>
+        <ShopCard title='Bike Donation Home' />
       </container>
     </main>
   );
