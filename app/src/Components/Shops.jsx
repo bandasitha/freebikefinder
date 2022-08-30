@@ -5,6 +5,7 @@ import './Shops.css';
 import ShopCard from './ShopCard';
 
 export default function Shops({}) {
+  console.log('shops file...');
   const [shops, setShops] = useState([]);
 
   const { state } = useParams();
@@ -12,8 +13,8 @@ export default function Shops({}) {
   console.log(state);
 
   const endpoint = state
-    ? `http://localhost:5000/shops?state=${state}`
-    : `http://localhost:5000/shops`;
+    ? `http://localhost:8000/shops?state=${state}`
+    : `http://localhost:8000/shops`;
 
   console.log(endpoint);
 
