@@ -4,9 +4,16 @@
   "description": "## Problem Statement",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    // "test": "jest",
     "startDev": "nodemon index.js",
-    "start": "node server.js"
+    // "start": "node server.js",
+    // 
+    "dev": "react-scripts start",
+    "start": "serve -s build",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
