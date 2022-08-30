@@ -63,3 +63,23 @@
 - Testing
 - Bug fixes
 - Develop presentation
+
+## Deployed App
+
+### https://freebikefinder.herokuapp.com/
+
+Please be aware at this time only non-profit bike shops are searchable. Organizations that help connect those in need of a free helmet or bike will be added in the future.
+
+The above link may be used to access the web-based app, which in its prototype form displays a Navbar at the top of the page that may be used to display:
+* Home: The home page
+* Bikes: A list of non-profit bike shops that offer bikes for sale, maintenance spaces, and bicycling accessories. 
+  * Selecting the name of a shop takes the user to a page with more details for that shop, including a link to the shop's website. 
+  * Selecting the State listed under a shop of interest will take the user to a list of non-profit shops found in the state selected. From this results page a user may click through a shop's name to its details page.
+* Helmets:  Organizations that help connect those in need of a free helmet, many of which serve children in need. This is scheduled to be added before Sept. 10th 2022.
+* Other: Organizations that help connect those in need of a free bike, many of which serve adults. This is scheduled to be added before Sept. 10th 2022,
+
+## Data API
+
+### https://cloud.mongodb.com/v2/62f71db690cef5637649e611#metrics/replicaSet/62f71de23cd6507a405d92c0/explorer/free-bike-finder/companies/find
+
+The above link may be used to access the Atlas front-end of the MongoDB collection of non-profit shops and organizations that assist with low/no-cost bicycles and accessories. 
