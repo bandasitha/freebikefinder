@@ -13,10 +13,8 @@ export default function Shops({}) {
   console.log(state);
 
   const endpoint = state
-    ? `http://localhost:8000/shops?state=${state}`
-    : `http://localhost:8000/shops`;
-
-  console.log(endpoint);
+    ? `https://freebikefinder.herokuapp.com/shops?state=${state}`
+    : `https://freebikefinder.herokuapp.com/shops`;
 
   useEffect(() => {
     fetch(endpoint)
