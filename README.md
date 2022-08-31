@@ -66,17 +66,17 @@
 
 ## Deployed App
 
-### 
+### https://snazzy-centaur-898546.netlify.app/
 
 Please be aware at this time only non-profit bike shops are searchable. Organizations that help connect those in need of a free helmet or bike will be added in the future.
 
 The above link may be used to access the web-based app, which in its prototype form displays a Navbar at the top of the page that may be used to display:
 * Home: The home page
-* Bikes: A list of non-profit bike shops that offer bikes for sale, maintenance spaces, and bicycling accessories. 
+* Bikes: A list of non-profit bike shops that offer bikes for sale, maintenance spaces, and bicycling accessories. **This page is currently unreliable, and is scheduled to be finished before Sept. 10th 2022.**
   * Selecting the name of a shop takes the user to a page with more details for that shop, including a link to the shop's website. 
   * Selecting the State listed under a shop of interest will take the user to a list of non-profit shops found in the state selected. From this results page a user may click through a shop's name to its details page.
 * Helmets:  Organizations that help connect those in need of a free helmet, many of which serve children in need. This is scheduled to be added before Sept. 10th 2022.
-* Other: Organizations that help connect those in need of a free bike, many of which serve adults. This is scheduled to be added before Sept. 10th 2022,
+* Other: Organizations that help connect those in need of a free bike, many of which serve adults. This is scheduled to be added before Sept. 10th 2022.
 
 ## Data API
 
