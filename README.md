@@ -66,7 +66,7 @@
 
 ## Deployed App
 
-### https://freebikefinder.herokuapp.com/
+### 
 
 Please be aware at this time only non-profit bike shops are searchable. Organizations that help connect those in need of a free helmet or bike will be added in the future.
 
@@ -80,6 +80,6 @@ The above link may be used to access the web-based app, which in its prototype f
 
 ## Data API
 
-### https://cloud.mongodb.com/v2/62f71db690cef5637649e611#metrics/replicaSet/62f71de23cd6507a405d92c0/explorer/free-bike-finder/companies/find
+### https://freebikefinder.herokuapp.com/shops
 
-The above link may be used to access the Atlas front-end of the MongoDB collection of non-profit shops and organizations that assist with low/no-cost bicycles and accessories. 
+The above link provides API access to the database collection, facilitating data retrieval, as well as document creation and deletion (CRUD functionality). The collection features non-profit shops and organizations that assist with low/no-cost bicycles and accessories.
