@@ -1,19 +1,19 @@
 const { Router } = require('express');
 const router = Router();
-const helmetData = require('../dataInterface/helmets');
+const nonProfitData = require('../dataInterface/nonProfits');
 
-// Route to retrieve (GET) all helmets from database
-// curl 'http://localhost:8000/helmets'
-// curl 'http://localhost:8000/helmets?state=nc'
+// Route to retrieve (GET) all nonprofits from database
+// curl 'http://localhost:8000/nonprofits'
+// curl 'http://localhost:8000/nonprofits?state=ca'
 router.get('/', async (req, res) => {
   let result;
   let resultStatus;
 
   if (Object.keys(req.query).length === 0) {
-    result = await helmetData.getAllHelmets();
+    result = await nonProfitData.getAllNonProfits();
   } else {
     let state = req.query.state.toUpperCase();
-    result = await helmetData.getHelmetByParameter(state);
+    result = await nonProfitData.getNonProfitByParameter(state);
   }
 
   if (result === null) {
@@ -29,11 +29,11 @@ router.get('/', async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
-// Route to retrieve (GET) one helmet from database by _id value
-// curl http://localhost:8000/helmets/6301a9905051f0576dc8661b
+// Route to retrieve (GET) one nonprofit from database by _id value
+// curl http://localhost:8000/nonprofits/6301a9c35051f0576dc895a1
 router.get('/:id', async (req, res) => {
   let resultStatus;
-  const result = await helmetData.getHelmetById(req.params.id);
+  const result = await nonProfitData.getNonProfitById(req.params.id);
 
   if (result === null) {
     resultStatus = 500;
@@ -46,10 +46,10 @@ router.get('/:id', async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
-// curl -X POST -H "Content-Type: application/json" -d '{"website":"http://test-helmet.com", "name":"Test helmet", "phone":"(234)456-5678"}' http://localhost:8000/helmets
+// curl -X POST -H "Content-Type: application/json" -d '{"website":"http://test-nonprofit.com", "name":"Test nonprofit", "state":"CA", "phone":"(234)456-5678"}' http://localhost:8000/nonprofits
 router.post('/', async (req, res) => {
   let resultStatus;
-  let result = await helmetData.createHelmet(req.body);
+  let result = await nonProfitData.createNonProfit(req.body);
 
   if (result === null) {
     resultStatus = 500;
@@ -64,10 +64,10 @@ router.post('/', async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
-// curl -X PUT -H "Content-Type: application/json" -d '{"website":"http://test-helmet-update.com", "name":"Test helmet changed"}' http://localhost:8000/helmets/<_id here>
+// curl -X PUT -H "Content-Type: application/json" -d '{"website":"http://test-nonprofit-update.com", "name":"Test nonprofit changed"}' http://localhost:8000/nonprofits/<_id here>
 router.put('/:id', async (req, res) => {
   let resultStatus;
-  const result = await helmetData.updateHelmetById(req.params.id, req.body);
+  const result = await nonProfitData.updateNonProfitById(req.params.id, req.body);
 
   if (result === null) {
     resultStatus = 500;
@@ -80,10 +80,10 @@ router.put('/:id', async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
-// curl -X DELETE http://localhost:8000/helmets/<_id here>
+// curl -X DELETE http://localhost:8000/nonprofits/<_id here>
 router.delete('/:id', async (req, res) => {
   let resultStatus;
-  const result = await helmetData.deleteByID(req.params.id);
+  const result = await nonProfitData.deleteByID(req.params.id);
 
   if (result.error) {
     resultStatus = 400;

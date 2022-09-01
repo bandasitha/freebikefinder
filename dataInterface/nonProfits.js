@@ -8,34 +8,34 @@ const uri =
 const client = new MongoClient(uri);
 
 const databaseName = 'free-bike-finder';
-const collName = 'helmets';
+const collName = 'nonprofits';
 
 const database = client.db(databaseName);
-const helmetData = database.collection(collName);
+const nonProfitData = database.collection(collName);
 
 module.exports = {};
 
-// Retrieve all helmets from db
-module.exports.getAllHelmets = async () => {
+// Retrieve all nonprofits from db
+module.exports.getAllNonProfits = async () => {
   const query = {};
-  let cursor = await helmetData.find(query);
+  let cursor = await nonProfitData.find(query);
   return cursor.toArray();
 };
 
-// Retrieve one helmet org from db matching provided _id value
-module.exports.getHelmetById = async (helmetId) => {
-  if (!validateId(helmetId)) {
+// Retrieve one nonprofit org from db matching provided _id value
+module.exports.getNonProfitById = async (nonProfitId) => {
+  if (!validateId(nonProfitId)) {
     return { error: `Invalid id value. Please try again` };
   }
 
-  let result = await helmetData.findOne({ _id: ObjectId(helmetId) });
+  let result = await nonProfitData.findOne({ _id: ObjectId(nonProfitId) });
 
   return result;
 };
 
-// Retrieve all helmet orgs from db matching supplied parameters
-module.exports.getHelmetByParameter = async (state) => {
-  let cursor = await helmetData.find({ state: state });
+// Retrieve all nonprofit orgs from db matching supplied parameters
+module.exports.getNonProfitByParameter = async (state) => {
+  let cursor = await nonProfitData.find({ state: state });
   return cursor
     ? cursor.toArray()
     : {
@@ -44,33 +44,33 @@ module.exports.getHelmetByParameter = async (state) => {
 };
 
 // Creates one new shop with provided data fields
-module.exports.createHelmet = async (itemsToInsert) => {
+module.exports.createNonProfit = async (itemsToInsert) => {
   const query = { ...itemsToInsert };
-  let result = await helmetData.insertOne(query);
+  let result = await nonProfitData.insertOne(query);
 
   return result;
 };
 
 // Updates one shop with provided data fields matching provided _id value
-module.exports.updateHelmetById = async (helmetId, helmetObj) => {
-  if (!validateId(helmetId)) {
+module.exports.updateNonProfitById = async (nonProfitId, nonProfitObj) => {
+  if (!validateId(nonProfitId)) {
     return { error: `Invalid id value. Please try again` };
   }
 
-  let result = await helmetData.updateOne(
-    { _id: ObjectId(helmetId) },
-    { $set: helmetObj }
+  let result = await nonProfitData.updateOne(
+    { _id: ObjectId(nonProfitId) },
+    { $set: nonProfitObj }
   );
 
   return result;
 };
 
-module.exports.deleteByID = async (helmetId) => {
-  if (!validateId(helmetId)) {
+module.exports.deleteByID = async (nonProfitId) => {
+  if (!validateId(nonProfitId)) {
     return { error: `Invalid id value. Please try again` };
   }
-  const deletionRules = { _id: ObjectId(helmetId) };
-  let result = await helmetData.deleteOne(deletionRules);
+  const deletionRules = { _id: ObjectId(nonProfitId) };
+  let result = await nonProfitData.deleteOne(deletionRules);
 
   if (result.deletedCount != 1) {
     return {

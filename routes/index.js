@@ -4,6 +4,7 @@ const router = Router();
 
 router.use('/shops', require('./shops'));
 router.use('/helmets', require('./helmets'));
+router.use('/nonProfits', require('./nonProfits'));
 router.use('/', (req, res) =>
   res.status(404).send('Route not found. Maybe you meant /shops?')
 );
