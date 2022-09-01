@@ -18,6 +18,5 @@ server.use(function (req, res, next) {
   next();
 });
 server.use(routes);
-console.log("server.js is called")
 
 module.exports = server;

@@ -66,7 +66,7 @@ module.exports.updateShopById = async (shopId, shopObj) => {
 };
 
 module.exports.deleteByID = async (shopId) => {
-  if (~validateId(shopId)) {
+  if (!validateId(shopId)) {
     return { error: `Invalid id value. Please try again` };
   }
   const deletionRules = { _id: ObjectId(shopId) };

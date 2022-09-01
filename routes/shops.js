@@ -85,7 +85,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // curl -X DELETE http://localhost:5000/shops/<_id here>
-// doesn't work
+// doesn't work?
 router.delete('/:id', async (req, res) => {
   let resultStatus;
   const result = await shopData.deleteByID(req.params.id);

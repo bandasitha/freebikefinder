@@ -39,12 +39,12 @@ module.exports.gethelmetByParameter = async (state) => {
   return cursor
     ? cursor.toArray()
     : {
-        error: `There was an error retrieving shop data. Please try again later.`,
+        error: `There was an error retrieving organization data. Please try again later.`,
       };
 };
 
 // Creates one new shop with provided data fields
-module.exports.createhelmet = async (itemsToInsert) => {
+module.exports.createHelmet = async (itemsToInsert) => {
   const query = { ...itemsToInsert };
   let result = await helmetData.insertOne(query);
 
@@ -52,33 +52,33 @@ module.exports.createhelmet = async (itemsToInsert) => {
 };
 
 // Updates one shop with provided data fields matching provided _id value
-module.exports.updateHelmetById = async (shopId, shopObj) => {
-  if (!validateId(shopId)) {
+module.exports.updateHelmetById = async (helmetId, helmetObj) => {
+  if (!validateId(helmetId)) {
     return { error: `Invalid id value. Please try again` };
   }
 
   let result = await helmetData.updateOne(
-    { _id: ObjectId(shopId) },
-    { $set: shopObj }
+    { _id: ObjectId(helmetId) },
+    { $set: helmetObj }
   );
 
   return result;
 };
 
-module.exports.deleteByID = async (shopId) => {
-  if (~validateId(shopId)) {
+module.exports.deleteByID = async (helmetId) => {
+  if (!validateId(helmetId)) {
     return { error: `Invalid id value. Please try again` };
   }
-  const deletionRules = { _id: ObjectId(shopId) };
+  const deletionRules = { _id: ObjectId(helmetId) };
   let result = await helmetData.deleteOne(deletionRules);
 
   if (result.deletedCount != 1) {
     return {
-      error: `Something went wrong. ${result.deletedCount} shops were deleted.`,
+      error: `Something went wrong. ${result.deletedCount} organizations were deleted.`,
     };
   }
 
-  return { message: `Deleted ${result.deletedCount} shops.` };
+  return { message: `Deleted ${result.deletedCount} organizations.` };
 };
 
 // Helper function to validate provided _id values
