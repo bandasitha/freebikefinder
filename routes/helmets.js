@@ -1,20 +1,19 @@
 const { Router } = require('express');
 const router = Router();
-const shopData = require('../dataInterface/shops');
+const helmetData = require('../dataInterface/helmets');
 
-// Route to retrieve (GET) all shops from database
-// curl 'http://localhost:5000/shops'
-// curl 'http://localhost:5000/shops?state=ri'
-// works
+// Route to retrieve (GET) all helmets from database
+// curl 'http://localhost:8000/helmets'
+// curl 'http://localhost:8000/helmets?state=nc'
 router.get('/', async (req, res) => {
   let result;
   let resultStatus;
 
   if (Object.keys(req.query).length === 0) {
-    result = await shopData.getAllShops();
+    result = await helmetData.getAllHelmets();
   } else {
     let state = req.query.state.toUpperCase();
-    result = await shopData.getShopByParameter(state);
+    result = await helmetData.gethelmetByParameter(state);
   }
 
   if (result === null) {
@@ -30,12 +29,11 @@ router.get('/', async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
-// Route to retrieve (GET) one shop from database by _id value
-// curl http://localhost:5000/shops/630a74a5423ebfea5ae6acc3
-// works
+// Route to retrieve (GET) one helmet from database by _id value
+// curl http://localhost:8000/helmets/6301a9905051f0576dc8661b
 router.get('/:id', async (req, res) => {
   let resultStatus;
-  const result = await shopData.getShopById(req.params.id);
+  const result = await helmetData.getHelmetById(req.params.id);
 
   if (result === null) {
     resultStatus = 500;
@@ -48,11 +46,10 @@ router.get('/:id', async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
-// curl -X POST -H "Content-Type: application/json" -d '{"website":"http://test-shop.com", "name":"Test Shop", "state":"WA", "address":"1234 Main St. Seattle WA", "phone":"(234)456-5678", "email":"test@test.co"}' http://localhost:5000/shops
-// works
+// curl -X POST -H "Content-Type: application/json" -d '{"website":"http://test-helmet.com", "name":"Test helmet", "phone":"(234)456-5678"}' http://localhost:8000/helmets
 router.post('/', async (req, res) => {
   let resultStatus;
-  let result = await shopData.createShop(req.body);
+  let result = await helmetData.createHelmet(req.body);
 
   if (result === null) {
     resultStatus = 500;
@@ -67,11 +64,10 @@ router.post('/', async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
-// curl -X PUT -H "Content-Type: application/json" -d '{"website":"http://test-shop-update.com", "name":"Test Shop", "state":"WA", "address":"1234 Main St. Seattle WA", "phone":"(234)456-5678", "email":"test@test-update.co"}' http://localhost:5000/shops/630a74a5423ebfea5ae6acc3
-// works
+// curl -X PUT -H "Content-Type: application/json" -d '{"website":"http://test-helmet-update.com", "name":"Test helmet changed"}' http://localhost:8000/helmets/6310eac1a45c93b386b0d95e
 router.put('/:id', async (req, res) => {
   let resultStatus;
-  const result = await shopData.updateShopById(req.params.id, req.body);
+  const result = await helmetData.updateHelmetById(req.params.id, req.body);
 
   if (result === null) {
     resultStatus = 500;
@@ -84,11 +80,10 @@ router.put('/:id', async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
-// curl -X DELETE http://localhost:5000/shops/<_id here>
-// doesn't work?
+// curl -X DELETE http://localhost:8000/helmets/<_id here>
 router.delete('/:id', async (req, res) => {
   let resultStatus;
-  const result = await shopData.deleteByID(req.params.id);
+  const result = await helmetData.deleteByID(req.params.id);
 
   if (result.error) {
     resultStatus = 400;
