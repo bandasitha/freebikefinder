@@ -5,6 +5,7 @@ const helmetData = require('../dataInterface/helmets');
 // Route to retrieve (GET) all helmets from database
 // curl 'http://localhost:8000/helmets'
 // curl 'http://localhost:8000/helmets?state=nc'
+
 router.get('/', async (req, res) => {
   let result;
   let resultStatus;

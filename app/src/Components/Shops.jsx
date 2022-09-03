@@ -4,17 +4,14 @@ import { useParams } from 'react-router-dom';
 import './Shops.css';
 import ShopCard from './ShopCard';
 
-export default function Shops({}) {
-  console.log('shops file...');
+export default function Shops({ asset }) {
   const [shops, setShops] = useState([]);
 
   const { state } = useParams();
 
-  console.log(state);
-
   const endpoint = state
-    ? `https://freebikefinder.herokuapp.com/shops?state=${state}`
-    : `https://freebikefinder.herokuapp.com/shops`;
+    ? `http://localhost:8000/${asset}?state=${state}`
+    : `http://localhost:8000/${asset}`;
 
   useEffect(() => {
     fetch(endpoint)
