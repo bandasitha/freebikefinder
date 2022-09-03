@@ -21,16 +21,21 @@ function App() {
         <Link className='navbar__link' to='/helmets'>
           Helmets
         </Link>
-        <Link className='navbar__link' to='/other'>
-          Other
+        <Link className='navbar__link' to='/nonprofits'>
+          Nonprofits
         </Link>
       </nav>
       <container>
         <Routes>
-          <Route path='/' element={<Home />}></Route>
-          <Route path='/shops' element={<Shops />}></Route>
-          <Route path='/shops/:state' element={<Shops />}></Route>
-          <Route path='/shop/:shopId' element={<Shop />}></Route>
+          <Route path='/' element={<Home />} />
+          <Route path='/shops' element={<Shops asset='shops' key={1} />} />
+          <Route path='/helmets' element={<Shops asset='helmets' key={2} />} />
+          <Route
+            path='/nonprofits'
+            element={<Shops asset='nonprofits' key={3} />}
+          />
+          <Route path='/shops/:state' element={<Shops asset='state' />} />
+          <Route path='/shop/:shopId' element={<Shop />} />
         </Routes>
         <ShopCard title='Bike Donation Home' />
       </container>
