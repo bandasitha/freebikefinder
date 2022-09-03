@@ -43,6 +43,7 @@ function App() {
 
           <Route path='/shop/:id' element={<Shop asset='shops' />} />
           <Route path='/helmet/:id' element={<Shop asset='helmets' />} />
+          <Route path='/nonprofit/:id' element={<Shop asset='nonprofits' />} />
         </Routes>
         <ShopCard title='Bike Donation Home' />
       </container>

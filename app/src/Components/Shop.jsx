@@ -8,7 +8,7 @@ export default function Shop({ asset }) {
   const [shop, setShop] = useState([]);
 
   useEffect(() => {
-    fetch(`https://freebikefinder.herokuapp.com/${asset}/${id}`)
+    fetch(`http://localhost:8000/${asset}/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setShop(data);

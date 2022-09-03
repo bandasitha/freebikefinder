@@ -12,7 +12,7 @@ export default function ShopCard({
   return (
     <div className='shop'>
       <h2>
-        <a href={`../shop/${shopId}`}>{shopName}</a>
+        <a href={`../${asset}/${shopId}`}>{shopName}</a>
       </h2>
       <address>{shopAddress}</address>
       {shopState ? (
