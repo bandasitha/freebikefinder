@@ -3,12 +3,12 @@ import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './Shop.css';
 
-export default function Shop() {
-  const { shopId } = useParams();
+export default function Shop({ asset }) {
+  const { id } = useParams();
   const [shop, setShop] = useState([]);
 
   useEffect(() => {
-    fetch(`https://freebikefinder.herokuapp.com/shops/${shopId}`)
+    fetch(`https://freebikefinder.herokuapp.com/${asset}/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setShop(data);

@@ -34,8 +34,15 @@ function App() {
             path='/nonprofits'
             element={<Shops asset='nonprofits' key={3} />}
           />
-          <Route path='/shops/:state' element={<Shops asset='state' />} />
-          <Route path='/shop/:shopId' element={<Shop />} />
+          <Route path='/shops/:state' element={<Shops asset='shops' />} />
+          <Route path='/helmets/:state' element={<Shops asset='helmets' />} />
+          <Route
+            path='/nonprofits/:state'
+            element={<Shops asset='nonprofits' />}
+          />
+
+          <Route path='/shop/:id' element={<Shop asset='shops' />} />
+          <Route path='/helmet/:id' element={<Shop asset='helmets' />} />
         </Routes>
         <ShopCard title='Bike Donation Home' />
       </container>
