@@ -10,8 +10,8 @@ export default function Shops({ asset }) {
   const { state } = useParams();
 
   const endpoint = state
-    ? `https://freebikefinder.herokuapp.com/${asset}?state=${state}`
-    : `https://freebikefinder.herokuapp.com/${asset}`;
+    ? `http://localhost:8000/${asset}?state=${state}`
+    : `http://localhost:8000/${asset}`;
 
   useEffect(() => {
     fetch(endpoint)
@@ -32,7 +32,7 @@ export default function Shops({ asset }) {
               shopName={shop.name}
               shopAddress={shop.address}
               shopState={shop.state}
-              asset={asset}
+              asset={asset.slice(0, -1)}
             />
           );
         })}
