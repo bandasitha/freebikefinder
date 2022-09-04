@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import './Shops.css';
 import ShopCard from './ShopCard';
+import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
 
 export default function Shops({ asset }) {
   const [shops, setShops] = useState([]);
@@ -22,8 +24,8 @@ export default function Shops({ asset }) {
   }, []);
 
   return (
-    <div className='shop'>
-      <div className='carousel__content'>
+    <Container>
+      <Row>
         {shops.map((shop, index) => {
           return (
             <ShopCard
@@ -32,12 +34,13 @@ export default function Shops({ asset }) {
               shopName={shop.name}
               shopAddress={shop.address}
               shopState={shop.state}
+              shopPhone={shop.phone}
               asset={asset.slice(0, -1)}
             />
           );
         })}
-      </div>
-    </div>
+      </Row>
+    </Container>
   );
 }
 
