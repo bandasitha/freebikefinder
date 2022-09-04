@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 const nonProfitData = require('../dataInterface/nonProfits');
+const auth = require('../auth');
 
 // Route to retrieve (GET) all nonprofits from database
 // curl 'http://localhost:8000/nonprofits'
@@ -46,8 +47,8 @@ router.get('/:id', async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
-// curl -X POST -H "Content-Type: application/json" -d '{"website":"http://test-nonprofit.com", "name":"Test nonprofit", "state":"CA", "phone":"(234)456-5678"}' http://localhost:8000/nonprofits
-router.post('/', async (req, res) => {
+// curl -X POST -H "Content-Type: application/json" -H "x-access-token:<token-here>" -d '{"website":"http://test-nonprofit.com", "name":"Test nonprofit", "state":"CA", "phone":"(234)456-5678"}' http://localhost:8000/nonprofits
+router.post('/', auth.verifyToken, async (req, res) => {
   let resultStatus;
   let result = await nonProfitData.createNonProfit(req.body);
 
@@ -64,8 +65,8 @@ router.post('/', async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
-// curl -X PUT -H "Content-Type: application/json" -d '{"website":"http://test-nonprofit-update.com", "name":"Test nonprofit changed"}' http://localhost:8000/nonprofits/<_id here>
-router.put('/:id', async (req, res) => {
+// curl -X PUT -H "Content-Type: application/json" -H "x-access-token:<token-here>" -d '{"website":"http://test-nonprofit-update.com", "name":"Test nonprofit changed"}' http://localhost:8000/nonprofits/<_id here>
+router.put('/:id', auth.verifyToken, async (req, res) => {
   let resultStatus;
   const result = await nonProfitData.updateNonProfitById(req.params.id, req.body);
 
@@ -80,8 +81,8 @@ router.put('/:id', async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
-// curl -X DELETE http://localhost:8000/nonprofits/<_id here>
-router.delete('/:id', async (req, res) => {
+// curl -X DELETE -H "x-access-token:<token-here>" http://localhost:8000/nonprofits/<_id here>
+router.delete('/:id', auth.verifyToken, async (req, res) => {
   let resultStatus;
   const result = await nonProfitData.deleteByID(req.params.id);
 
