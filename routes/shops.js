@@ -50,7 +50,6 @@ router.get('/:id', async (req, res) => {
 });
 
 // curl -X POST -H "Content-Type: application/json" -H "x-access-token:<token-here>" -d '{"website":"http://test-shop.com", "name":"Test Shop 2", "state":"WA", "address":"1234 Main St. Seattle WA", "phone":"(234)456-5678", "email":"test@test.org"}' http://localhost:8000/shops
-// works
 router.post('/', auth.verifyToken, async (req, res) => {
   let resultStatus;
   let result = await shopData.createShop(req.body);
@@ -68,8 +67,7 @@ router.post('/', auth.verifyToken, async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
-// curl -X PUT -H "Content-Type: application/json" -H "x-access-token:<token-here>" -d '{"website":"http://test-shop-update.com", "name":"Test Shop", "state":"WA", "address":"1234 Main St. Seattle WA", "phone":"(234)456-5678", "email":"test@test-update.co"}' http://localhost:8000/shops/630a74a5423ebfea5ae6acc3
-// works
+// curl -X PUT -H "Content-Type: application/json" -H "x-access-token:<token-here>" -d '{"website":"http://test-shop-update.com", "name":"Test Shop", "state":"WA", "address":"1234 Main St. Seattle WA", "phone":"(234)456-5678", "email":"test@test-update.co"}' http://localhost:8000/shops/<_id-here>
 router.put('/:id', auth.verifyToken, async (req, res) => {
   let resultStatus;
   const result = await shopData.updateShopById(req.params.id, req.body);
@@ -86,7 +84,6 @@ router.put('/:id', auth.verifyToken, async (req, res) => {
 });
 
 // curl -X DELETE -H "x-access-token:<token-here>" http://localhost:8000/shops/<_id here>
-// doesn't work?
 router.delete('/:id', auth.verifyToken, async (req, res) => {
   let resultStatus;
   const result = await shopData.deleteByID(req.params.id);
