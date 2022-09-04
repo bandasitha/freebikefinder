@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 const helmetData = require('../dataInterface/helmets');
+const auth = require('../auth');
 
 // Route to retrieve (GET) all helmets from database
 // curl 'http://localhost:8000/helmets'
@@ -47,8 +48,8 @@ router.get('/:id', async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
-// curl -X POST -H "Content-Type: application/json" -d '{"website":"http://test-helmet.com", "name":"Test helmet", "phone":"(234)456-5678"}' http://localhost:8000/helmets
-router.post('/', async (req, res) => {
+// curl -X POST -H "Content-Type: application/json" -H "x-access-token:<token-here>" -d '{"website":"http://test-helmet.com", "name":"Test helmet", "phone":"(234)456-5678"}' http://localhost:8000/helmets
+router.post('/', auth.verifyToken, async (req, res) => {
   let resultStatus;
   let result = await helmetData.createHelmet(req.body);
 
@@ -65,8 +66,8 @@ router.post('/', async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
-// curl -X PUT -H "Content-Type: application/json" -d '{"website":"http://test-helmet-update.com", "name":"Test helmet changed"}' http://localhost:8000/helmets/<_id here>
-router.put('/:id', async (req, res) => {
+// curl -X PUT -H "Content-Type: application/json" -H "x-access-token:<token-here>" -d '{"website":"http://test-helmet-update.com", "name":"Test helmet changed"}' http://localhost:8000/helmets/<_id here>
+router.put('/:id', auth.verifyToken, async (req, res) => {
   let resultStatus;
   const result = await helmetData.updateHelmetById(req.params.id, req.body);
 
@@ -81,8 +82,8 @@ router.put('/:id', async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
-// curl -X DELETE http://localhost:8000/helmets/<_id here>
-router.delete('/:id', async (req, res) => {
+// curl -X DELETE -H "x-access-token:<token-here>" http://localhost:8000/helmets/<_id here>
+router.delete('/:id', auth.verifyToken, async (req, res) => {
   let resultStatus;
   const result = await helmetData.deleteByID(req.params.id);
 
