@@ -17,7 +17,7 @@ export default function ShopCard({
       <Card.Header>
         {
           <Card.Title>
-            <a href={`../${asset}/${shopId}`}>{shopName}</a>
+            <a href={`../${asset.slice(0, -1)}/${shopId}`}>{shopName}</a>
           </Card.Title>
         }
       </Card.Header>
@@ -43,4 +43,11 @@ export default function ShopCard({
   );
 }
 
-ShopCard.propTypes = {};
+ShopCard.propTypes = {
+  shopId: PropTypes.string.isRequired,
+  shopName: PropTypes.string.isRequired,
+  shopAddress: PropTypes.string.isRequired,
+  shopState: PropTypes.string.isRequired,
+  shopPhone: PropTypes.string.isRequired,
+  asset: PropTypes.string.isRequired,
+};

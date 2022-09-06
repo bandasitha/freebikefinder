@@ -36,6 +36,7 @@ module.exports.getShopById = async (shopId) => {
 // Retrieve all shops from db matching supplied parameters
 module.exports.getShopByParameter = async (state) => {
   let cursor = await shopData.find({ state: state });
+
   return cursor
     ? cursor.toArray()
     : {

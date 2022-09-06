@@ -1,9 +1,8 @@
 const { Router } = require('express');
 const router = Router();
 const userData = require('../dataInterface/users');
-const bcrypt = require('bcryptjs');
 
-// curl -X POST -H "Content-Type: application/json" -d '{"email": "test@test.com", "password": "password"}' http://localhost:8000/users/login
+// curl -X POST -H "Content-Type: application/json" -d '{"email": "admin@test.com", "password": "password"}' http://localhost:8000/users/login
 router.post('/login', async (req, res) => {
   let resultStatus;
   let result = await userData.findByCredentials(req.body);

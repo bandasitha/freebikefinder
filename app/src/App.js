@@ -1,16 +1,15 @@
 import './App.css';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Home from './Components/Home';
-import ShopCard from './Components/ShopCard';
 import Shops from './Components/Shops';
 import Shop from './Components/Shop';
+import Login from './Components/Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 
-function App() {
+export default function App() {
   return (
     <Container>
       <Navbar bg='light' expand='lg' sticky='top'>
@@ -22,6 +21,7 @@ function App() {
               <Nav.Link href='/shops'>Bikes</Nav.Link>
               <Nav.Link href='/helmets'>Helmets</Nav.Link>
               <Nav.Link href='/nonprofits'>Nonprofits</Nav.Link>
+              {<Login />}
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -45,10 +45,9 @@ function App() {
           <Route path='/shop/:id' element={<Shop asset='shops' />} />
           <Route path='/helmet/:id' element={<Shop asset='helmets' />} />
           <Route path='/nonprofit/:id' element={<Shop asset='nonprofits' />} />
+          <Route path='/login' element={<Shop asset='nonprofits' />} />
         </Routes>
       </div>
     </Container>
   );
 }
-
-export default App;
