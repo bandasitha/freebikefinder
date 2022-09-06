@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 export default function Home() {
   return (
     <Container className='hero'>
-      <h1 className='hero-text'>Everyone deserve reliable transportation</h1>
+      <h1 className='hero-text'>Everyone deserves reliable transportation</h1>
       <p>
         <Button href='/shops' Style='primary' size='lg'>
           Find yourself a bike!
