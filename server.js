@@ -1,13 +1,11 @@
 const express = require('express');
-
 const routes = require('./routes');
+const cors = require('cors');
 
 const server = express();
 server.use(express.json());
 
-const auth = require('./auth');
-
-// Enable CORS
+// // Enable CORS
 server.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
@@ -20,6 +18,8 @@ server.use(function (req, res, next) {
   );
   next();
 });
+
+server.use(cors({ credentials: true }));
 
 function login(req, res, next) {
   next();
