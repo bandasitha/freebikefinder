@@ -47,6 +47,7 @@ router.get('/:id', async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
+// PROTECTED ROUTE
 // curl -X POST -H "Content-Type: application/json" -H "x-access-token:<token-here>" -d '{"website":"http://test-nonprofit.com", "name":"Test nonprofit", "state":"CA", "phone":"(234)456-5678"}' http://localhost:8000/nonprofits
 router.post('/', auth.verifyToken, async (req, res) => {
   let resultStatus;
@@ -65,10 +66,14 @@ router.post('/', auth.verifyToken, async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
+// PROTECTED ROUTE
 // curl -X PUT -H "Content-Type: application/json" -H "x-access-token:<token-here>" -d '{"website":"http://test-nonprofit-update.com", "name":"Test nonprofit changed"}' http://localhost:8000/nonprofits/<_id here>
 router.put('/:id', auth.verifyToken, async (req, res) => {
   let resultStatus;
-  const result = await nonProfitData.updateNonProfitById(req.params.id, req.body);
+  const result = await nonProfitData.updateNonProfitById(
+    req.params.id,
+    req.body
+  );
 
   if (result === null) {
     resultStatus = 500;
@@ -81,6 +86,7 @@ router.put('/:id', auth.verifyToken, async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
+// PROTECTED ROUTE
 // curl -X DELETE -H "x-access-token:<token-here>" http://localhost:8000/nonprofits/<_id here>
 router.delete('/:id', auth.verifyToken, async (req, res) => {
   let resultStatus;

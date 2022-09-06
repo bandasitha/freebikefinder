@@ -6,7 +6,6 @@ const auth = require('../auth');
 // Route to retrieve (GET) all helmets from database
 // curl 'http://localhost:8000/helmets'
 // curl 'http://localhost:8000/helmets?state=nc'
-
 router.get('/', async (req, res) => {
   let result;
   let resultStatus;
@@ -48,6 +47,7 @@ router.get('/:id', async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
+// PROTECTED ROUTE
 // curl -X POST -H "Content-Type: application/json" -H "x-access-token:<token-here>" -d '{"website":"http://test-helmet.com", "name":"Test helmet", "phone":"(234)456-5678"}' http://localhost:8000/helmets
 router.post('/', auth.verifyToken, async (req, res) => {
   let resultStatus;
@@ -66,6 +66,7 @@ router.post('/', auth.verifyToken, async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
+// PROTECTED ROUTE
 // curl -X PUT -H "Content-Type: application/json" -H "x-access-token:<token-here>" -d '{"website":"http://test-helmet-update.com", "name":"Test helmet changed"}' http://localhost:8000/helmets/<_id here>
 router.put('/:id', auth.verifyToken, async (req, res) => {
   let resultStatus;
@@ -82,6 +83,7 @@ router.put('/:id', auth.verifyToken, async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
+// PROTECTED ROUTE
 // curl -X DELETE -H "x-access-token:<token-here>" http://localhost:8000/helmets/<_id here>
 router.delete('/:id', auth.verifyToken, async (req, res) => {
   let resultStatus;

@@ -21,7 +21,7 @@ export default function Shops({ asset }) {
       .then((data) => {
         setShops(data);
       });
-  }, []);
+  }, [endpoint]);
 
   return (
     <Container>
@@ -35,7 +35,7 @@ export default function Shops({ asset }) {
               shopAddress={shop.address}
               shopState={shop.state}
               shopPhone={shop.phone}
-              asset={asset.slice(0, -1)}
+              asset={asset}
             />
           );
         })}

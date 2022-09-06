@@ -49,6 +49,7 @@ router.get('/:id', async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
+// PROTECTED ROUTE
 // curl -X POST -H "Content-Type: application/json" -H "x-access-token:<token-here>" -d '{"website":"http://test-shop.com", "name":"Test Shop 2", "state":"WA", "address":"1234 Main St. Seattle WA", "phone":"(234)456-5678", "email":"test@test.org"}' http://localhost:8000/shops
 router.post('/', auth.verifyToken, async (req, res) => {
   let resultStatus;
@@ -67,6 +68,7 @@ router.post('/', auth.verifyToken, async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
+// PROTECTED ROUTE
 // curl -X PUT -H "Content-Type: application/json" -H "x-access-token:<token-here>" -d '{"website":"http://test-shop-update.com", "name":"Test Shop", "state":"WA", "address":"1234 Main St. Seattle WA", "phone":"(234)456-5678", "email":"test@test-update.co"}' http://localhost:8000/shops/<_id-here>
 router.put('/:id', auth.verifyToken, async (req, res) => {
   let resultStatus;
@@ -83,6 +85,7 @@ router.put('/:id', auth.verifyToken, async (req, res) => {
   res.status(resultStatus).send(result);
 });
 
+// PROTECTED ROUTE
 // curl -X DELETE -H "x-access-token:<token-here>" http://localhost:8000/shops/<_id here>
 router.delete('/:id', auth.verifyToken, async (req, res) => {
   let resultStatus;

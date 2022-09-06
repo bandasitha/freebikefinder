@@ -13,7 +13,7 @@ export default function Shop({ asset }) {
       .then((data) => {
         setShop(data);
       });
-  }, []);
+  }, [asset, id]);
 
   return (
     <div className='shop'>
@@ -28,4 +28,6 @@ export default function Shop({ asset }) {
   );
 }
 
-Shop.propTypes = {};
+Shop.propTypes = {
+  asset: PropTypes.string.isRequired,
+};
