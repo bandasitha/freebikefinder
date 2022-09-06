@@ -6,7 +6,12 @@ import Modal from 'react-bootstrap/Modal';
 export default function Login() {
   const submitHandler = (e) => {
     e.preventDefault();
-    alert('Authentication coming...');
+
+    fetch('http://localhost:8000/users/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: { email: e.target.email, password: e.target.password },
+    }).then((response) => console.log(response));
   };
 
   const [show, setShow] = useState(false);
@@ -25,7 +30,7 @@ export default function Login() {
           <Modal.Title>Login</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form method='POST' action={submitHandler}>
+          <Form method='POST' onSubmit={submitHandler}>
             <Form.Group className='mb-3' controlId='formBasicEmail'>
               <Form.Label>Email address</Form.Label>
               <Form.Control type='email' placeholder='Enter email' />

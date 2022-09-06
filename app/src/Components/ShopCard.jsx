@@ -27,7 +27,13 @@ export default function ShopCard({
         </Card.Text>
         <address>{shopAddress}</address>
         <p>
-          <Button href='#'>Get directions</Button>
+          <Button
+            href={`https://www.google.com/maps?q=${shopAddress
+              .replaceAll(', ', '+')
+              .replaceAll(' ', '+')}`}
+          >
+            Get directions
+          </Button>
         </p>
         {shopState ? (
           <p>
