@@ -18,18 +18,26 @@ main().catch(console.error);
 
 async function companiesAndHelmets(client, state){
     const pipeline = [
-        {
-          '$match': {
-            'state': state
+      {
+        '$search': {
+          'index': 'default', 
+          'text': {
+            'query': 'FREE', 
+            'path': [
+              'cost', 'website', 'name'
+            ]
           }
-        }, {
-          '$match': {
-            'helmets': 'TRUE'
-          }
-        }, {
-          '$limit': 5
         }
-      ];
+      }, {
+        '$match': {
+          'state': 'CA'
+        }
+      }, {
+        '$match': {
+          'helmets': 'TRUE'
+        }
+      }
+    ];
       const aggCursor = client.db("freebikefinder").collection("companies").aggregate(pipeline);
       await aggCursor.forEach(companyList => {
         console.log(`${companyList._id}: ${companyList.name}`)
