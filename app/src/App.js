@@ -21,7 +21,6 @@ export default function App() {
               <Nav.Link href='/shops'>Bikes</Nav.Link>
               <Nav.Link href='/helmets'>Helmets</Nav.Link>
               <Nav.Link href='/nonprofits'>Nonprofits</Nav.Link>
-              {<Login />}
             </Nav>
           </Navbar.Collapse>
         </Container>
