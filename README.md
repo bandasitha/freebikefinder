@@ -1,5 +1,19 @@
 # freebikefinder
 
+## Table of Contents
+1. [Problem Statement](#problem-statement)
+2. [Design](#design)
+    1. [Front-End](#front-end)
+    2. [Back-end](#back-end)
+3. [Work Timeline](#work-timeline)
+4. [Deployed App](#deployed-app)
+5. [Data API](#data-api)
+    1. [Accessing Shops](#accessing-shops)
+    2. [Accessing Organizations that provide free helmets](#accessing-organizations-that-provide-free-helmets)
+    3. [Accessing Organizations that connect people with free/low-cost bikes ](#accessing-organizations-that-connect-people-with-freelow-cost-bikes)
+    4. [Working with data fields](#working-with-data-fields)
+6. [For Developers](#for-developers)
+
 ## Problem Statement
 
 1. **Scope:** Access to reliable transportation is an issue affecting many individuals. Owning a car is costly and access to public transportation requires money and proximity access points. According to the American Public Transportation Association, [45% of Americans have no access to public transportation](https://www.apta.com/news-publications/public-transportation-facts/). According the 2020 census data, [over 11% (over 37 million) of US citizens are living in poverty](https://www.prb.org/resources/how-poverty-in-the-united-states-is-measured-and-why-it-matters/). In 2022, 1634 counties in the U.S. were considered "rural" or "underserved" by the [Consumer Financial Protection Bureau](https://www.consumerfinance.gov/compliance/compliance-resources/mortgage-resources/rural-and-underserved-counties-list/).
@@ -9,7 +23,8 @@
 
 ## Design
 
-1. **Front-End:** An approachable, straighforward, mobile-friendly (some underserved individuals may not have easy access to a full computer) search function that allows at least partial selection of search criteria, including (but not limited to):
+### **Front-End:** 
+An approachable, straighforward, mobile-friendly (some underserved individuals may not have easy access to a full computer) search function that allows at least partial selection of search criteria, including (but not limited to):
 
 - State
 - If bicycles are available (vs. repair-only organizations)
@@ -18,7 +33,8 @@
 - If bicycle donations are accepted
 - Clientele (student, children, etc)
 
-2. **Back-End:** A MongoDB collection, one-document-per-organization organization with the following endpoint(s):
+### **Back-End:** 
+A MongoDB collection, one-document-per-organization organization with the following endpoint(s):
 
 | Request Type | Endpoint                     | Expected results                                                                                           |
 | ------------ | ---------------------------- | ---------------------------------------------------------------------------------------------------------- |
@@ -27,14 +43,14 @@
 | GET          | /:state/classes/:classType   | Retrieves all businesses with classes field including :classType value                                     |
 | GET          | /:state/service/:serviceType | Retrieves all businesses with service field including :serviceType value                                   |
 | GET          | /:state/donate/:donationType | Retrieves all businesses with donate field including :donationType value                                   |
-| GET          | /business                    | Retrieves all businesses                                                                                   |
+| GET          | /shops                       | Retrieves all businesses                                                                                   |
 | POST         | /business                    | Adds a new business record                                                                                 |
 | GET          | /business/:businessId        | Retrieves all businesses with \_id matching :businessId value                                              |
 | PUT          | /business/:businessId        | Updates business record with \_id value matching :businessId                                               |
 | DELETE       | /business/:businessId        | Removes business with \_id value matching :businessId                                                      |
 | GET          | /:state?query                | Searches for query value in business records.                                                              |
 
-3. **Data:** Data has been sourced through internet search, ensuring lack of defunct or closed organizations, with contact details (address, email and phone number) and social media links available for improved user approachability (particularly among certain age groups).
+**Data:** Data has been sourced through internet search, ensuring lack of defunct or closed organizations, with contact details (address, email and phone number) and social media links available for improved user approachability (particularly among certain age groups).
 
 ## Work Timeline
 
@@ -83,3 +99,50 @@ The above link may be used to access the web-based app, which in its prototype f
 ### https://freebikefinder.herokuapp.com/shops
 
 The above link provides API access to the database collection, facilitating data retrieval, as well as document creation and deletion (CRUD functionality). The collection features non-profit shops and organizations that assist with low/no-cost bicycles and accessories.
+
+### Accessing Shops
+1. All shops: https://freebikefinder.herokuapp.com/shops
+2. Specific shop (via document ID): https://freebikefinder.herokuapp.com/shops/<_id-here>
+    1. Example: https://freebikefinder.herokuapp.com/shops/62f8166c5051f0576d48c629
+3. All shops in a particular state: https://freebikefinder.herokuapp.com/shops?state=<state_-_abbreviation>
+    1. Example: https://freebikefinder.herokuapp.com/shops?state=ca
+
+### Accessing Organizations that provide free helmets:
+1. All organizations: https://freebikefinder.herokuapp.com/helmets
+2. Specific shop (via document ID): https://freebikefinder.herokuapp.com/helmets/<_id-here>
+    1. Example: https://freebikefinder.herokuapp.com/helmets/62f8166c5051f0576d48c629
+3. All organizations in a particular state: https://freebikefinder.herokuapp.com/helmets?state=<state_-_abbreviation>
+    1. Example: https://freebikefinder.herokuapp.com/helmets?state=ca
+
+### Accessing Organizations that connect people with free/low-cost bikes:
+1. All organizations: https://freebikefinder.herokuapp.com/nonprofits
+2. Specific shop (via document ID): https://freebikefinder.herokuapp.com/nonprofits/<_id-here>
+    1. Example: https://freebikefinder.herokuapp.com/nonprofits/62f8166c5051f0576d48c629
+3. All organizations in a particular state: https://freebikefinder.herokuapp.com/nonprofits?state=<state_abbreviation>
+    1. Example: https://freebikefinder.herokuapp.com/nonprofits?state=ca
+
+### Working with data fields
+
+The API returns data in a standard JSON format, which makes accessing specific data straightforward. Accessing specific fields such as "suggested donation(s)" or "address" is done through dot notation once the JSON object has been returned. For example:
+- <object_here>.suggested_donation
+- <object_here>.address
+
+**Please note:** Data fields will (at this time) return a string.
+
+## For Developers:
+
+To run this code locally: 
+- Fork this repo 
+- Clone the code to your local environment 
+
+You may run the back-end service with any of the following terminal commands, from the root of the project.
+- `npm run startDev` 
+- `npm run start` 
+- `npm start`
+- `node index.js`
+
+Depending on your system one or two may work better than the other(s). Nodemon is installed for auto-restart after changes are made. 
+
+The front-end may be run with `npm start` from the `./app` directory. 
+
+The test suite may be run with `npm run <filename>` from the `./routes` directory. The test files end in `.test.js`. 
