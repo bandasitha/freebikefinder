@@ -1,7 +1,7 @@
 const request = require('supertest');
 const server = require('../server');
 
-// Declare the jest will mock movieData. Must be before the require statement.
+// Declare the jest will mock data. Must be before the require statement.
 jest.mock('../dataInterface/helmets');
 const helmetsData = require('../dataInterface/helmets');
 
