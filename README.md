@@ -26,7 +26,8 @@
 ### **Front-End:** 
 An approachable, straighforward, mobile-friendly (some underserved individuals may not have easy access to a full computer) search function that allows at least partial selection of search criteria, including (but not limited to):
 
-- State
+- Location
+- Contact information
 - If bicycles are available (vs. repair-only organizations)
 - Available accessories &/or helmets
 - Available classes
@@ -36,19 +37,30 @@ An approachable, straighforward, mobile-friendly (some underserved individuals m
 ### **Back-End:** 
 A MongoDB collection, one-document-per-organization organization with the following endpoint(s):
 
-| Request Type | Endpoint                     | Expected results                                                                                           |
-| ------------ | ---------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| GET          | /:state                      | Retrieves all businesses with state field matching :state.                                                 |
-| GET          | /:state/product/:productType | Retrieves all businesses with state field matching :state and productsOffered field including :productType |
-| GET          | /:state/classes/:classType   | Retrieves all businesses with classes field including :classType value                                     |
-| GET          | /:state/service/:serviceType | Retrieves all businesses with service field including :serviceType value                                   |
-| GET          | /:state/donate/:donationType | Retrieves all businesses with donate field including :donationType value                                   |
-| GET          | /shops                       | Retrieves all businesses                                                                                   |
-| POST         | /business                    | Adds a new business record                                                                                 |
-| GET          | /business/:businessId        | Retrieves all businesses with \_id matching :businessId value                                              |
-| PUT          | /business/:businessId        | Updates business record with \_id value matching :businessId                                               |
-| DELETE       | /business/:businessId        | Removes business with \_id value matching :businessId                                                      |
-| GET          | /:state?query                | Searches for query value in business records.                                                              |
+| Request Type | Endpoint                         | Expected results                                                              |
+| ------------ | ----------------------------     | ------------------------------------------------------------------------------|
+| GET          | /shops/:_id                      | Retrieves single shop via document's ObjectId()                               |
+| GET          | /shops                           | Retrieves all shops                                                           |
+| GET          | /shops?state=<state_abbr.>       | Retrieves all shops with state field matching <state_abbr.>.                  |
+| POST         | /shops                           | Adds a new shop document                                                      |
+| PUT          | /shop/:_id                       | Updates single shop document via document's ObjectID()                        |
+| DELETE       | /business/:_id                   | Removes single shop document via document's ObjectId()                        |
+| GET          | /helmets                         | Retrieves all non-profits that offer free helmets                             |
+| GET          | /helmets/:_id                    | Retrieves free-helmet-non-profit via document's ObjectId                      |
+| GET          | /helmets?state=<state_abbr.>     | Retrieves all free-helmet-non-profits with state field matching <state_abbr.> |
+| POST         | /helmets                         | Adds a new non-profit that offers free helmets                                |
+| PUT          | /shop/:_id                       | Updates single free-helmet-non-profit document via document's ObjectID        |
+| DELETE       | /business/:_id                   | Removes single free-helmet-non-profit document via document's ObjectId        |
+| GET          | /non-profits                     | Retrieves all non-profits that offer free bikes                               |
+| GET          | /non-profits/:_id                | Retrieves free-bike-non-profit via document's ObjectId                        |
+| GET          | /non-profits?state=<state_abbr.> | Retrieves all free-helmet-non-profits with state field matching <state_abbr.> |
+| POST         | /non-profits                     | Adds a new non-profit that offers free bike                                   |
+| PUT          | /non-profits/:_id                | Updates single free-bike-non-profit document via document's ObjectID          |
+| DELETE       | /non-profits/:_id                | Removes single free-bike-non-profit document via document's ObjectId          |
+
+**Note:** <state_abbr.> represents the postal two-letter abbreviation for each state, including "DC" for Washington DC. 
+
+**Note:** POST, PUT, and DELETE routes are protected and accessible only via administrator credentials, to ensure data integrity. 
 
 **Data:** Data has been sourced through internet search, ensuring lack of defunct or closed organizations, with contact details (address, email and phone number) and social media links available for improved user approachability (particularly among certain age groups).
 
@@ -84,11 +96,11 @@ A MongoDB collection, one-document-per-organization organization with the follow
 
 ### https://snazzy-centaur-898546.netlify.app/
 
-Please be aware at this time only non-profit bike shops are searchable. Organizations that help connect those in need of a free helmet or bike will be added in the future.
+On occasion the heroku app will "fall asleep" with lack of calls. Accessing the link to the Heroku app (see below) such that it displays the JSON data entries in your browser may be necessary for the Netlify-hosted front-end app to function properly. It is not necessary to access `/shops`, `/helmets` *and* `nonprofits`; only accessing one is enough to "wake up" the back end. 
 
 The above link may be used to access the web-based app, which in its prototype form displays a Navbar at the top of the page that may be used to display:
 * Home: The home page
-* Bikes: A list of non-profit bike shops that offer bikes for sale, maintenance spaces, and bicycling accessories. **This page is currently unreliable, and is scheduled to be finished before Sept. 10th 2022.**
+* Bikes: A list of non-profit bike shops that offer bikes for sale, maintenance spaces, and bicycling accessories. 
   * Selecting the name of a shop takes the user to a page with more details for that shop, including a link to the shop's website. 
   * Selecting the State listed under a shop of interest will take the user to a list of non-profit shops found in the state selected. From this results page a user may click through a shop's name to its details page.
 * Helmets:  Organizations that help connect those in need of a free helmet, many of which serve children in need. This is scheduled to be added before Sept. 10th 2022.
@@ -99,6 +111,8 @@ The above link may be used to access the web-based app, which in its prototype f
 ### https://freebikefinder.herokuapp.com/shops
 
 The above link provides API access to the database collection, facilitating data retrieval, as well as document creation and deletion (CRUD functionality). The collection features non-profit shops and organizations that assist with low/no-cost bicycles and accessories.
+
+`/shops` may be replaced with `/helmets` or `/nonprofits` to access those collections.
 
 ### Accessing Shops
 1. All shops: https://freebikefinder.herokuapp.com/shops
