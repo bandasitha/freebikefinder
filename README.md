@@ -101,11 +101,11 @@ On occasion the heroku app will "fall asleep" with lack of calls. Accessing the 
 
 The above link may be used to access the web-based app, which in its prototype form displays a Navbar at the top of the page that may be used to display:
 * Home: The home page
-* Bikes: A list of non-profit bike shops that offer bikes for sale, maintenance spaces, and bicycling accessories. 
+* Bikes: A list of non-profit bike shops that offer bikes for sale. Includes phone number and address for quick contact use. Also includes a "Get Directions" button that utilizes Google Maps. 
   * Selecting the name of a shop takes the user to a page with more details for that shop, including a link to the shop's website. 
-  * Selecting the State listed under a shop of interest will take the user to a list of non-profit shops found in the state selected. From this results page a user may click through a shop's name to its details page.
-* Helmets:  Organizations that help connect those in need of a free helmet, many of which serve children in need. This is scheduled to be added before Sept. 10th 2022.
-* Other: Organizations that help connect those in need of a free bike, many of which serve adults. This is scheduled to be added before Sept. 10th 2022.
+  * Selecting the "View all shops in <state_abbreviation>" listed under a shop of interest will take the user to a list of non-profit shops found in the state selected. From this results page a user may click through a shop's name to its details page.
+* Helmets:  Organizations that help connect those in need of a free helmet, many of which serve children in need. The usability of this page mirrors that of "Bikes".
+* Other: Organizations that help connect those in need of a free bike, many of which serve adults. The usability of this page mirrors that of "Bikes".
 
 ## Data API
 
@@ -119,21 +119,21 @@ The above link provides API access to the database collection, facilitating data
 1. All shops: https://freebikefinder.herokuapp.com/shops
 2. Specific shop (via document ID): https://freebikefinder.herokuapp.com/shops/<_id-here>
     1. Example: https://freebikefinder.herokuapp.com/shops/62f8166c5051f0576d48c629
-3. All shops in a particular state: https://freebikefinder.herokuapp.com/shops?state=<state_-_abbreviation>
+3. A list of all available shops in a particular state can be done throuugh the query parameter syntax: `?state=<state_abbreviation>`
     1. Example: https://freebikefinder.herokuapp.com/shops?state=ca
 
 ### Accessing Organizations that provide free helmets:
 1. All organizations: https://freebikefinder.herokuapp.com/helmets
 2. Specific shop (via document ID): https://freebikefinder.herokuapp.com/helmets/<_id-here>
     1. Example: https://freebikefinder.herokuapp.com/helmets/62f8166c5051f0576d48c629
-3. All organizations in a particular state: https://freebikefinder.herokuapp.com/helmets?state=<state_-_abbreviation>
+3. A list of all available organizations that provide free helmets in a particular state can be done throuugh the query parameter syntax: `?state=<state_-_abbreviation>`
     1. Example: https://freebikefinder.herokuapp.com/helmets?state=ca
 
 ### Accessing Organizations that connect people with free/low-cost bikes:
 1. All organizations: https://freebikefinder.herokuapp.com/nonprofits
 2. Specific shop (via document ID): https://freebikefinder.herokuapp.com/nonprofits/<_id-here>
     1. Example: https://freebikefinder.herokuapp.com/nonprofits/62f8166c5051f0576d48c629
-3. All organizations in a particular state: https://freebikefinder.herokuapp.com/nonprofits?state=<state_abbreviation>
+3. A list of all available organizations that provide free bikes in a particular state can be done throuugh the query parameter syntax: `?state=<state_abbreviation>`
     1. Example: https://freebikefinder.herokuapp.com/nonprofits?state=ca
 
 ### Working with data fields
@@ -170,3 +170,4 @@ The indexes set up for uniqueness and performance are displayed in the images at
 - helmets_index.png (uniqueness)
 
 The aggregation pipeline may be accessed through `aggregation.js` in the root of the project directory. Text search is part of aggregation. 
+
