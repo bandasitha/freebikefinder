@@ -13,6 +13,7 @@
     3. [Accessing Organizations that connect people with free/low-cost bikes ](#accessing-organizations-that-connect-people-with-freelow-cost-bikes)
     4. [Working with data fields](#working-with-data-fields)
 6. [For Developers](#for-developers)
+7. [For Grading](#for-grading)
 
 ## Problem Statement
 
@@ -160,3 +161,12 @@ Depending on your system one or two may work better than the other(s). Nodemon i
 The front-end may be run with `npm start` from the `./app` directory. 
 
 The test suite may be run with `npm run <filename>` from the `./routes` directory. The test files end in `.test.js`. 
+
+## For Grading
+
+The indexes set up for uniqueness and performance are displayed in the images at the root of the project directory labeled:
+
+- companies_index.png (performance)
+- helmets_index.png (uniqueness)
+
+The aggregation pipeline may be accessed through `aggregation.js` in the root of the project directory. Text search is part of aggregation. 
