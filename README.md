@@ -111,12 +111,12 @@ Please be aware that some entries will feature an address that starts with "1234
 The above syntax provides API access to the database collection, facilitating data retrieval, as well as document creation and deletion (CRUD functionality). The collection features non-profit shops and organizations that assist with low/no-cost bicycles and accessories.
 
 ### Accessing Non-profit bike shops (/shops)
-1. All shops: https://freebikefinder.herokuapp.com/shops
+1. All shops: `https://freebikefinder.herokuapp.com/shops`
 2. Specific shop (via document ID): `https://freebikefinder.herokuapp.com/shops/<_id-here>`
     1. Example input: `https://freebikefinder.herokuapp.com/shops/62f8166c5051f0576d48c62a`
     2. Example output:
     `{"_id":"62f8166c5051f0576d48c62a","website":"https://bicas.org/","name":"Bicycle Inter Community Art and Salvage","state":"AZ","address":"2001 N 7th Ave Tucson AZ","phone":"(520) 628-7950","email":"bicas@bicas.org","contact_form":"","facebook":"","twitter":"","instagram":"","cost":"Earn/Cost","Bikes":"TRUE","bikes":"TRUE","helmets":"","maintenance":"TRUE","tools":"TRUE","classes":"TRUE","suggested_donation":"","volunteering":"TRUE","donate_bikes":"TRUE","target_client":""}`
-3. All shops in a particular state: https://freebikefinder.herokuapp.com/shops?state=<state_-_abbreviation>
+3. All shops in a particular state: `https://freebikefinder.herokuapp.com/shops?state=<state_-_abbreviation>`
     1. Example input: `https://freebikefinder.herokuapp.com/shops?state=ri`
     2. Example output:
     `[{"_id":"62f8166c5051f0576d48c6a3","website":"https://www.recycleabike.org/","name":"Recycle-A-Bike","state":"RI","address":"1911 Westminster St. Providence, RI 02909","phone":"(401) 525-1822","email":"shop@recycleabike.org","contact_form":"","facebook":"","twitter":"","instagram":"","cost":"Free","Bikes":"TRUE","bikes":"","helmets":"","maintenance":"","tools":"","classes":"","suggested_donation":"","volunteering":"","donate_bikes":"","target_client":""}]`
