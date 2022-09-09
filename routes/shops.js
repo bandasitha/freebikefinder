@@ -4,8 +4,8 @@ const shopData = require('../dataInterface/shops');
 const auth = require('../auth');
 
 // Route to retrieve (GET) all shops from database
-// curl 'http://localhost:5000/shops'
-// curl 'http://localhost:5000/shops?state=ri'
+// curl 'https://freebikefinder.herokuapp.com/shops'
+// curl 'https://freebikefinder.herokuapp.com/shops?state=ri'
 // works
 router.get('/', async (req, res) => {
   let result;
@@ -32,7 +32,7 @@ router.get('/', async (req, res) => {
 });
 
 // Route to retrieve (GET) one shop from database by _id value
-// curl http://localhost:5000/shops/630a74a5423ebfea5ae6acc3
+// curl 'https://freebikefinder.herokuapp.com/shops/62f8166c5051f0576d48c62a'
 // works
 router.get('/:id', async (req, res) => {
   let resultStatus;
@@ -50,7 +50,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // PROTECTED ROUTE
-// curl -X POST -H "Content-Type: application/json" -H "x-access-token:<token-here>" -d '{"website":"http://test-shop.com", "name":"Test Shop 2", "state":"WA", "address":"1234 Main St. Seattle WA", "phone":"(234)456-5678", "email":"test@test.org"}' http://localhost:8000/shops
+// curl -X POST -H "Content-Type: application/json" -H "x-access-token:<token-here>" -d '{"website":"http://test-shop.com", "name":"Test Shop 2", "state":"WA", "address":"1234 Main St. Seattle WA", "phone":"(234)456-5678", "email":"test@test.org"}' https://freebikefinder.herokuapp.com/shops
 router.post('/', auth.verifyToken, async (req, res) => {
   let resultStatus;
   let result = await shopData.createShop(req.body);
@@ -69,7 +69,7 @@ router.post('/', auth.verifyToken, async (req, res) => {
 });
 
 // PROTECTED ROUTE
-// curl -X PUT -H "Content-Type: application/json" -H "x-access-token:<token-here>" -d '{"website":"http://test-shop-update.com", "name":"Test Shop", "state":"WA", "address":"1234 Main St. Seattle WA", "phone":"(234)456-5678", "email":"test@test-update.co"}' http://localhost:8000/shops/<_id-here>
+// curl -X PUT -H "Content-Type: application/json" -H "x-access-token:<token-here>" -d '{"website":"http://test-shop-update.com", "name":"Test Shop", "state":"WA", "address":"1234 Main St. Seattle WA", "phone":"(234)456-5678", "email":"test@test-update.co"}' https://freebikefinder.herokuapp.com/shops/<_id-here>
 router.put('/:id', auth.verifyToken, async (req, res) => {
   let resultStatus;
   const result = await shopData.updateShopById(req.params.id, req.body);
@@ -86,7 +86,7 @@ router.put('/:id', auth.verifyToken, async (req, res) => {
 });
 
 // PROTECTED ROUTE
-// curl -X DELETE -H "x-access-token:<token-here>" http://localhost:8000/shops/<_id here>
+// curl -X DELETE -H "x-access-token:<token-here>" https://freebikefinder.herokuapp.com/shops/<_id here>
 router.delete('/:id', auth.verifyToken, async (req, res) => {
   let resultStatus;
   const result = await shopData.deleteByID(req.params.id);

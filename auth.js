@@ -4,6 +4,7 @@ const TOKEN_KEY = 'werup32198hreqbeifqfdbdfgewf8asf7dfn324i32';
 
 module.exports.createToken = function (identifier) {
   const token = jwt.sign({ user_id: identifier }, TOKEN_KEY);
+  console.log('TOKEN: ', token);
   return token;
 };
 
