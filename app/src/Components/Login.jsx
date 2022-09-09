@@ -7,7 +7,7 @@ export default function Login() {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    fetch('http://localhost:8000/users/login', {
+    fetch('https://freebikefinder.herokuapp.com/users/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: { email: e.target.email, password: e.target.password },
