@@ -29,11 +29,6 @@ An approachable, straighforward, mobile-friendly (some underserved individuals m
 
 - Location
 - Contact information
-- If bicycles are available (vs. repair-only organizations)
-- Available accessories &/or helmets
-- Available classes
-- If bicycle donations are accepted
-- Clientele (student, children, etc)
 
 ### **Back-End:** 
 A MongoDB collection, one-document-per-organization organization with the following endpoint(s):
@@ -61,9 +56,7 @@ A MongoDB collection, one-document-per-organization organization with the follow
 
 **Note:** <state_abbr.> represents the postal two-letter abbreviation for each state, including "DC" for Washington DC. 
 
-**Note:** POST, PUT, and DELETE routes are protected and accessible only via administrator credentials, to ensure data integrity. 
-
-**Data:** Data has been sourced through internet search, ensuring lack of defunct or closed organizations, with contact details (address, email and phone number) and social media links available for improved user approachability (particularly among certain age groups).
+**Note:** POST, PUT, and DELETE routes are protected and accessible only via administrator credentials, to ensure data integrity.
 
 ## Work Timeline
 
@@ -97,7 +90,7 @@ A MongoDB collection, one-document-per-organization organization with the follow
 
 ### https://snazzy-centaur-898546.netlify.app/
 
-On occasion the heroku app will "fall asleep" with lack of calls. Accessing the link to the Heroku app (see below) such that it displays the JSON data entries in your browser may be necessary for the Netlify-hosted front-end app to function properly. It is not necessary to access `/shops`, `/helmets` *and* `nonprofits`; only accessing one is enough to "wake up" the back end. 
+Please be aware at this time only non-profit bike shops are searchable. Organizations that help connect those in need of a free helmet or bike will be added in the future.
 
 The above link may be used to access the web-based app, which in its prototype form displays a Navbar at the top of the page that may be used to display:
 * Home: The home page
@@ -107,48 +100,64 @@ The above link may be used to access the web-based app, which in its prototype f
 * Helmets:  Organizations that help connect those in need of a free helmet, many of which serve children in need. The usability of this page mirrors that of "Bikes".
 * Other: Organizations that help connect those in need of a free bike, many of which serve adults. The usability of this page mirrors that of "Bikes".
 
+On occasion the heroku app will "fall asleep" with lack of calls. Accessing the link to the Heroku app (see below) such that it displays the JSON data entries in your browser may be necessary for the Netlify-hosted front-end app to function properly. It is not necessary to access `/shops`, `/helmets` *and* `nonprofits`; only accessing one is enough to "wake up" the back end.
+
+Please be aware that some entries will feature an address that starts with "1234 Main Street". These address entries are placeholders that are necessary to ensure functionality of the user-facing front end, and are likely **not** accurate.
+
 ## Data API
 
-### https://freebikefinder.herokuapp.com/shops
+### `https://freebikefinder.herokuapp.com/<collection>`
 
-The above link provides API access to the database collection, facilitating data retrieval, as well as document creation and deletion (CRUD functionality). The collection features non-profit shops and organizations that assist with low/no-cost bicycles and accessories.
+The above syntax provides API access to the database collection, facilitating data retrieval, as well as document creation and deletion (CRUD functionality). The collection features non-profit shops and organizations that assist with low/no-cost bicycles and accessories.
 
-`/shops` may be replaced with `/helmets` or `/nonprofits` to access those collections.
-
-### Accessing Shops
+### Accessing Non-profit bike shops (/shops)
 1. All shops: https://freebikefinder.herokuapp.com/shops
-2. Specific shop (via document ID): https://freebikefinder.herokuapp.com/shops/<_id-here>
-    1. Example: https://freebikefinder.herokuapp.com/shops/62f8166c5051f0576d48c629
-3. A list of all available shops in a particular state can be done throuugh the query parameter syntax: `?state=<state_abbreviation>`
-    1. Example: https://freebikefinder.herokuapp.com/shops?state=ca
+2. Specific shop (via document ID): `https://freebikefinder.herokuapp.com/shops/<_id-here>`
+    1. Example input: `https://freebikefinder.herokuapp.com/shops/62f8166c5051f0576d48c62a`
+    2. Example output:
+    `{"_id":"62f8166c5051f0576d48c62a","website":"https://bicas.org/","name":"Bicycle Inter Community Art and Salvage","state":"AZ","address":"2001 N 7th Ave Tucson AZ","phone":"(520) 628-7950","email":"bicas@bicas.org","contact_form":"","facebook":"","twitter":"","instagram":"","cost":"Earn/Cost","Bikes":"TRUE","bikes":"TRUE","helmets":"","maintenance":"TRUE","tools":"TRUE","classes":"TRUE","suggested_donation":"","volunteering":"TRUE","donate_bikes":"TRUE","target_client":""}`
+3. All shops in a particular state: https://freebikefinder.herokuapp.com/shops?state=<state_-_abbreviation>
+    1. Example input: `https://freebikefinder.herokuapp.com/shops?state=ri`
+    2. Example output:
+    `[{"_id":"62f8166c5051f0576d48c6a3","website":"https://www.recycleabike.org/","name":"Recycle-A-Bike","state":"RI","address":"1911 Westminster St. Providence, RI 02909","phone":"(401) 525-1822","email":"shop@recycleabike.org","contact_form":"","facebook":"","twitter":"","instagram":"","cost":"Free","Bikes":"TRUE","bikes":"","helmets":"","maintenance":"","tools":"","classes":"","suggested_donation":"","volunteering":"","donate_bikes":"","target_client":""}]`
 
-### Accessing Organizations that provide free helmets:
-1. All organizations: https://freebikefinder.herokuapp.com/helmets
-2. Specific shop (via document ID): https://freebikefinder.herokuapp.com/helmets/<_id-here>
-    1. Example: https://freebikefinder.herokuapp.com/helmets/62f8166c5051f0576d48c629
-3. A list of all available organizations that provide free helmets in a particular state can be done throuugh the query parameter syntax: `?state=<state_-_abbreviation>`
-    1. Example: https://freebikefinder.herokuapp.com/helmets?state=ca
+### Accessing Organizations that provide free helmets (/helmets)
+1. All organizations: `https://freebikefinder.herokuapp.com/helmets`
+2. Specific shop (via document ID): `https://freebikefinder.herokuapp.com/helmets/<_id-here>`
+    1. Example input: `https://freebikefinder.herokuapp.com/helmets/6301a9905051f0576dc8661e`
+    2. Example output: 
+    `{"_id":"6301a9905051f0576dc8661e","website":"https://www.northshorefire.com/","name":"Northshore - King County Fire District #16","state":"WA","address":"7220 NE 181st Street, Kenmore, WA 98028","phone":"(425) 354-1780","email":"","contact_form":"","facebook":"","twitter":"","instagram":"","cost":"","bikes":"","helmets":"TRUE","maintenance":"","tools":"","classes":"","suggested_donation":"$6-10","volunteering":"","donate_bikes":"","target_client":"Children"}`
+3. All organizations in a particular state: `https://freebikefinder.herokuapp.com/helmets?state=<state_-_abbreviation>`
+    1. Example input: `https://freebikefinder.herokuapp.com/helmets?state=ny`
+    2. Example output (truncated): 
+    `[{"_id":"6301a9905051f0576dc86626","website":"https://buffalopal.com/pal-bicycle-safety-and-free-bike-helmet-giveaway-program/","name":"PAL Bicycle Safety and Free Bike Helmet Giveaway Program","state":"NY","address":"65 Niagara Square, 21st Floor Buffalo, NY 14202","phone":"(716) 851-4615","email":"PoliceAthleticLeague@city-buffalo.com","contact_form":"","facebook":"https://www.facebook.com/PALBuffalo/","twitter":"https://twitter.com/PalBuffalo","instagram":"https://www.instagram.com/pal_buffalo/","cost":"Free","bikes":"","helmets":"TRUE","maintenance":"","tools":"","classes":"","suggested_donation":"","volunteering":"","donate_bikes":"","target_client":""}, ... ]`
+    
 
-### Accessing Organizations that connect people with free/low-cost bikes:
-1. All organizations: https://freebikefinder.herokuapp.com/nonprofits
-2. Specific shop (via document ID): https://freebikefinder.herokuapp.com/nonprofits/<_id-here>
-    1. Example: https://freebikefinder.herokuapp.com/nonprofits/62f8166c5051f0576d48c629
-3. A list of all available organizations that provide free bikes in a particular state can be done throuugh the query parameter syntax: `?state=<state_abbreviation>`
-    1. Example: https://freebikefinder.herokuapp.com/nonprofits?state=ca
+### Accessing Organizations that connect people with free/low-cost bikes (/nonprofits)
+1. All organizations: `https://freebikefinder.herokuapp.com/nonprofits`
+2. Specific shop (via document ID): `https://freebikefinder.herokuapp.com/nonprofits/<_id-here>`
+    1. Example input: `https://freebikefinder.herokuapp.com/nonprofits/6301a9c35051f0576dc895a3`
+    2. Example output:
+    `{"_id":"6301a9c35051f0576dc895a3","website":"https://bikechurch.santacruzhub.org/","name":"Bike Church","state":"CA","address":"1234 Main Street, Anytown, NC 12345","phone":"","email":"postmaster@santacruzhub.org","contact_form":"","facebook":"","twitter":"","instagram":"","cost":"","bikes":"TRUE","helmets":"","maintenance":"TRUE","tools":"TRUE","classes":"?","suggested_donation":"","volunteering":"","donate_bikes":"","target_client":""}`
+3. All organizations in a particular state: `https://freebikefinder.herokuapp.com/nonprofits?state=<state_abbreviation>`
+    1. Example input: `https://freebikefinder.herokuapp.com/nonprofits?state=ca`
+    2. Example output (truncated):
+    `[{"_id":"6301a9c35051f0576dc895a3","website":"https://bikechurch.santacruzhub.org/","name":"Bike Church","state":"CA","address":"1234 Main Street, Anytown, NC 12345","phone":"","email":"postmaster@santacruzhub.org","contact_form":"","facebook":"","twitter":"","instagram":"","cost":"","bikes":"TRUE","helmets":"","maintenance":"TRUE","tools":"TRUE","classes":"?","suggested_donation":"","volunteering":"","donate_bikes":"","target_client":""},{"_id":"6301a9c35051f0576dc895a2","website":"https://bikeslocounty.org/","name":"Bike Slo County ","state":"CA","address":"1234 Main Street, Anytown, NC 12345","phone":"","email":"rick@bikeslocounty.org","contact_form":"","facebook":"","twitter":"","instagram":"","cost":"Earn","bikes":"TRUE","helmets":"TRUE","maintenance":"TRUE","tools":"TRUE","classes":"TRUE","suggested_donation":"","volunteering":"","donate_bikes":"","target_client":""}, ... ]`
 
 ### Working with data fields
 
 The API returns data in a standard JSON format, which makes accessing specific data straightforward. Accessing specific fields such as "suggested donation(s)" or "address" is done through dot notation once the JSON object has been returned. For example:
-- <object_here>.suggested_donation
-- <object_here>.address
+- `<object_here>.suggested_donation`
+- `<object_here>.address`
 
-**Please note:** Data fields will (at this time) return a string.
+**Please note:** Data fields will (at this time) return (contain) a string.
 
 ## For Developers:
 
 To run this code locally: 
 - Fork this repo 
 - Clone the code to your local environment 
+- Run `npm install` in the root project directory
 
 You may run the back-end service with any of the following terminal commands, from the root of the project.
 - `npm run startDev` 
@@ -160,7 +169,9 @@ Depending on your system one or two may work better than the other(s). Nodemon i
 
 The front-end may be run with `npm start` from the `./app` directory. 
 
-The test suite may be run with `npm run <filename>` from the `./routes` directory. The test files end in `.test.js`. 
+Please be aware that the port used to query API endpoints may vary depending on your setup. The creators utilized ports 3000, 5000, and 8000, depending on the situation. Your `curl 'http://localhost:5000/...` may use or need a different port than 5000.
+
+The tests may be run with `npm run <filename>` from the `./routes` directory. The test files end in `.test.js`. 
 
 ## For Grading
 
@@ -170,4 +181,3 @@ The indexes set up for uniqueness and performance are displayed in the images at
 - helmets_index.png (uniqueness)
 
 The aggregation pipeline may be accessed through `aggregation.js` in the root of the project directory. Text search is part of aggregation. 
-
