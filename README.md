@@ -13,6 +13,7 @@
     3. [Accessing Organizations that connect people with free/low-cost bikes ](#accessing-organizations-that-connect-people-with-freelow-cost-bikes)
     4. [Working with data fields](#working-with-data-fields)
 6. [For Developers](#for-developers)
+7. [For Grading](#for-grading)
 
 ## Problem Statement
 
@@ -26,31 +27,36 @@
 ### **Front-End:** 
 An approachable, straighforward, mobile-friendly (some underserved individuals may not have easy access to a full computer) search function that allows at least partial selection of search criteria, including (but not limited to):
 
-- State
-- If bicycles are available (vs. repair-only organizations)
-- Available accessories &/or helmets
-- Available classes
-- If bicycle donations are accepted
-- Clientele (student, children, etc)
+- Location
+- Contact information
 
 ### **Back-End:** 
 A MongoDB collection, one-document-per-organization organization with the following endpoint(s):
 
-| Request Type | Endpoint                     | Expected results                                                                                           |
-| ------------ | ---------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| GET          | /:state                      | Retrieves all businesses with state field matching :state.                                                 |
-| GET          | /:state/product/:productType | Retrieves all businesses with state field matching :state and productsOffered field including :productType |
-| GET          | /:state/classes/:classType   | Retrieves all businesses with classes field including :classType value                                     |
-| GET          | /:state/service/:serviceType | Retrieves all businesses with service field including :serviceType value                                   |
-| GET          | /:state/donate/:donationType | Retrieves all businesses with donate field including :donationType value                                   |
-| GET          | /shops                       | Retrieves all businesses                                                                                   |
-| POST         | /business                    | Adds a new business record                                                                                 |
-| GET          | /business/:businessId        | Retrieves all businesses with \_id matching :businessId value                                              |
-| PUT          | /business/:businessId        | Updates business record with \_id value matching :businessId                                               |
-| DELETE       | /business/:businessId        | Removes business with \_id value matching :businessId                                                      |
-| GET          | /:state?query                | Searches for query value in business records.                                                              |
+| Request Type | Endpoint                         | Expected results                                                              |
+| ------------ | ----------------------------     | ------------------------------------------------------------------------------|
+| GET          | /shops/:_id                      | Retrieves single shop via document's ObjectId()                               |
+| GET          | /shops                           | Retrieves all shops                                                           |
+| GET          | /shops?state=<state_abbr.>       | Retrieves all shops with state field matching <state_abbr.>.                  |
+| POST         | /shops                           | Adds a new shop document                                                      |
+| PUT          | /shop/:_id                       | Updates single shop document via document's ObjectID()                        |
+| DELETE       | /business/:_id                   | Removes single shop document via document's ObjectId()                        |
+| GET          | /helmets                         | Retrieves all non-profits that offer free helmets                             |
+| GET          | /helmets/:_id                    | Retrieves free-helmet-non-profit via document's ObjectId                      |
+| GET          | /helmets?state=<state_abbr.>     | Retrieves all free-helmet-non-profits with state field matching <state_abbr.> |
+| POST         | /helmets                         | Adds a new non-profit that offers free helmets                                |
+| PUT          | /shop/:_id                       | Updates single free-helmet-non-profit document via document's ObjectID        |
+| DELETE       | /business/:_id                   | Removes single free-helmet-non-profit document via document's ObjectId        |
+| GET          | /non-profits                     | Retrieves all non-profits that offer free bikes                               |
+| GET          | /non-profits/:_id                | Retrieves free-bike-non-profit via document's ObjectId                        |
+| GET          | /non-profits?state=<state_abbr.> | Retrieves all free-helmet-non-profits with state field matching <state_abbr.> |
+| POST         | /non-profits                     | Adds a new non-profit that offers free bike                                   |
+| PUT          | /non-profits/:_id                | Updates single free-bike-non-profit document via document's ObjectID          |
+| DELETE       | /non-profits/:_id                | Removes single free-bike-non-profit document via document's ObjectId          |
 
-**Data:** Data has been sourced through internet search, ensuring lack of defunct or closed organizations, with contact details (address, email and phone number) and social media links available for improved user approachability (particularly among certain age groups).
+**Note:** <state_abbr.> represents the postal two-letter abbreviation for each state, including "DC" for Washington DC. 
+
+**Note:** POST, PUT, and DELETE routes are protected and accessible only via administrator credentials, to ensure data integrity.
 
 ## Work Timeline
 
@@ -88,21 +94,23 @@ Please be aware at this time only non-profit bike shops are searchable. Organiza
 
 The above link may be used to access the web-based app, which in its prototype form displays a Navbar at the top of the page that may be used to display:
 * Home: The home page
-* Bikes: A list of non-profit bike shops that offer bikes for sale, maintenance spaces, and bicycling accessories. **This page is currently unreliable, and is scheduled to be finished before Sept. 10th 2022.**
+* Bikes: A list of non-profit bike shops that offer bikes for sale. Includes phone number and address for quick contact use. Also includes a "Get Directions" button that utilizes Google Maps. 
   * Selecting the name of a shop takes the user to a page with more details for that shop, including a link to the shop's website. 
-  * Selecting the State listed under a shop of interest will take the user to a list of non-profit shops found in the state selected. From this results page a user may click through a shop's name to its details page.
-* Helmets:  Organizations that help connect those in need of a free helmet, many of which serve children in need. This is scheduled to be added before Sept. 10th 2022.
-* Other: Organizations that help connect those in need of a free bike, many of which serve adults. This is scheduled to be added before Sept. 10th 2022.
+  * Selecting the "View all shops in <state_abbreviation>" listed under a shop of interest will take the user to a list of non-profit shops found in the state selected. From this results page a user may click through a shop's name to its details page.
+* Helmets:  Organizations that help connect those in need of a free helmet, many of which serve children in need. The usability of this page mirrors that of "Bikes".
+* Other: Organizations that help connect those in need of a free bike, many of which serve adults. The usability of this page mirrors that of "Bikes".
+
+On occasion the heroku app will "fall asleep" with lack of calls. Accessing the link to the Heroku app (see below) such that it displays the JSON data entries in your browser may be necessary for the Netlify-hosted front-end app to function properly. It is not necessary to access `/shops`, `/helmets` *and* `nonprofits`; only accessing one is enough to "wake up" the back end.
 
 Please be aware that some entries will feature an address that starts with "1234 Main Street". These address entries are placeholders that are necessary to ensure functionality of the user-facing front end, and are likely **not** accurate.
 
 ## Data API
 
-### https://freebikefinder.herokuapp.com/shops
+### `https://freebikefinder.herokuapp.com/<collection>`
 
-The above link provides API access to the database collection, facilitating data retrieval, as well as document creation and deletion (CRUD functionality). The collection features non-profit shops and organizations that assist with low/no-cost bicycles and accessories.
+The above syntax provides API access to the database collection, facilitating data retrieval, as well as document creation and deletion (CRUD functionality). The collection features non-profit shops and organizations that assist with low/no-cost bicycles and accessories.
 
-### Accessing Shops
+### Accessing Non-profit bike shops (/shops)
 1. All shops: https://freebikefinder.herokuapp.com/shops
 2. Specific shop (via document ID): `https://freebikefinder.herokuapp.com/shops/<_id-here>`
     1. Example input: `https://freebikefinder.herokuapp.com/shops/62f8166c5051f0576d48c62a`
@@ -113,7 +121,7 @@ The above link provides API access to the database collection, facilitating data
     2. Example output:
     `[{"_id":"62f8166c5051f0576d48c6a3","website":"https://www.recycleabike.org/","name":"Recycle-A-Bike","state":"RI","address":"1911 Westminster St. Providence, RI 02909","phone":"(401) 525-1822","email":"shop@recycleabike.org","contact_form":"","facebook":"","twitter":"","instagram":"","cost":"Free","Bikes":"TRUE","bikes":"","helmets":"","maintenance":"","tools":"","classes":"","suggested_donation":"","volunteering":"","donate_bikes":"","target_client":""}]`
 
-### Accessing Organizations that provide free helmets:
+### Accessing Organizations that provide free helmets (/helmets)
 1. All organizations: `https://freebikefinder.herokuapp.com/helmets`
 2. Specific shop (via document ID): `https://freebikefinder.herokuapp.com/helmets/<_id-here>`
     1. Example input: `https://freebikefinder.herokuapp.com/helmets/6301a9905051f0576dc8661e`
@@ -125,7 +133,7 @@ The above link provides API access to the database collection, facilitating data
     `[{"_id":"6301a9905051f0576dc86626","website":"https://buffalopal.com/pal-bicycle-safety-and-free-bike-helmet-giveaway-program/","name":"PAL Bicycle Safety and Free Bike Helmet Giveaway Program","state":"NY","address":"65 Niagara Square, 21st Floor Buffalo, NY 14202","phone":"(716) 851-4615","email":"PoliceAthleticLeague@city-buffalo.com","contact_form":"","facebook":"https://www.facebook.com/PALBuffalo/","twitter":"https://twitter.com/PalBuffalo","instagram":"https://www.instagram.com/pal_buffalo/","cost":"Free","bikes":"","helmets":"TRUE","maintenance":"","tools":"","classes":"","suggested_donation":"","volunteering":"","donate_bikes":"","target_client":""}, ... ]`
     
 
-### Accessing Organizations that connect people with free/low-cost bikes:
+### Accessing Organizations that connect people with free/low-cost bikes (/nonprofits)
 1. All organizations: `https://freebikefinder.herokuapp.com/nonprofits`
 2. Specific shop (via document ID): `https://freebikefinder.herokuapp.com/nonprofits/<_id-here>`
     1. Example input: `https://freebikefinder.herokuapp.com/nonprofits/6301a9c35051f0576dc895a3`
@@ -163,4 +171,13 @@ The front-end may be run with `npm start` from the `./app` directory.
 
 Please be aware that the port used to query API endpoints may vary depending on your setup. The creators utilized ports 3000, 5000, and 8000, depending on the situation. Your `curl 'http://localhost:5000/...` may use or need a different port than 5000.
 
-The test suite may be run with `npm run <filename>` from the `./routes` directory. The test files end in `.test.js`. 
+The tests may be run with `npm run <filename>` from the `./routes` directory. The test files end in `.test.js`. 
+
+## For Grading
+
+The indexes set up for uniqueness and performance are displayed in the images at the root of the project directory labeled:
+
+- companies_index.png (performance)
+- helmets_index.png (uniqueness)
+
+The aggregation pipeline may be accessed through `aggregation.js` in the root of the project directory. Text search is part of aggregation. 
