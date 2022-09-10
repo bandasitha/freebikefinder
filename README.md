@@ -158,6 +158,7 @@ To run this code locally:
 - Fork this repo 
 - Clone the code to your local environment 
 - Run `npm install` in the root project directory
+- You will likely have to run `npm install bcrypt jest supertest` in the root directory, and `npm install react-scripts` in the `./app` directory for full functionality
 
 You may run the back-end service with any of the following terminal commands, from the root of the project.
 - `npm run startDev` 
