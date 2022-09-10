@@ -8,7 +8,7 @@ async function main() {
     try {
         await client.connect();
         await companiesAndHelmets(client, "CA");
-        console.log("Finding shops")
+        console.log("Finding shops");
     } finally {
         await client.close();
     }
@@ -40,6 +40,6 @@ async function companiesAndHelmets(client, state){
     ];
       const aggCursor = client.db("freebikefinder").collection("companies").aggregate(pipeline);
       await aggCursor.forEach(companyList => {
-        console.log(`${companyList._id}: ${companyList.name}`)
+        console.log(`${companyList._id}: ${companyList.name}`);
       })
 }

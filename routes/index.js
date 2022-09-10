@@ -1,6 +1,5 @@
 const { Router } = require('express');
 const router = Router();
-// require('dotenv').config();
 
 router.use('/shops', require('./shops'));
 router.use('/helmets', require('./helmets'));
