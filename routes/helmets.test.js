@@ -5,6 +5,9 @@ const server = require('../server');
 jest.mock('../dataInterface/helmets');
 const helmetsData = require('../dataInterface/helmets');
 
+jest.mock('../auth');
+const authMock = require('../auth');
+
 describe('/helmets routes', () => {
     beforeEach(() => {});
 
@@ -54,13 +57,15 @@ describe('GET /:id', () => {
     });
     it('should return 500 in case of error', async () => {
       
-      helmetsData.getShopById.mockResolvedValue(null);
+      helmetsData.getHelmetById.mockResolvedValue(null);
       const res = await request(server).get('/helmets/890');
       expect(res.statusCode).toEqual(500);
     });
   });
 
   describe('POST /', () => {
+  authMock.verifyToken.mockImplementation( function(req, res, next) {return next()} )
+
     it('should return the new record on success', async () => {
       
       const item = { _id: '890', title: 'One Day' };

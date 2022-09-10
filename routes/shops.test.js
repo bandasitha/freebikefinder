@@ -5,6 +5,9 @@ const server = require('../server');
 jest.mock('../dataInterface/shops');
 const shopData = require('../dataInterface/shops');
 
+jest.mock('../auth');
+const authMock = require('../auth');
+
 describe('/shops routes', () => {
   beforeEach(() => {});
 
@@ -59,6 +62,7 @@ describe('/shops routes', () => {
   });
 
   describe('POST /', () => {
+  authMock.verifyToken.mockImplementation( function(req, res, next) {return next()} )
     it('should return the new record on success', async () => {
       
       const item = { _id: '890', title: 'One Day' };
