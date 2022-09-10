@@ -171,7 +171,7 @@ The front-end may be run with `npm start` from the `./app` directory.
 
 Please be aware that the port used to query API endpoints may vary depending on your setup. The creators utilized ports 3000, 5000, and 8000, depending on the situation. Your `curl 'http://localhost:5000/...` may use or need a different port than 5000.
 
-The tests may be run with `npm run test` from the `./routes` directory. The test files end in `.test.js`. 
+The tests may be run with `npm run test` or `npm run <testfile>` from the `./routes` directory. The test files end in `.test.js`. 
 
 ## For Grading
 
